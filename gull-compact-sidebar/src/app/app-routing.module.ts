@@ -7,6 +7,10 @@ import { AdminLayoutSidebarCompactComponent } from './shared/components/layouts/
 
 const adminRoutes: Routes = [
     {
+      path: 'livreurs',
+      loadChildren: () => import('./views/livreur/livreur.module').then(m => m.LivreurModule)
+    },
+    {
       path: 'dashboard',
       loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
