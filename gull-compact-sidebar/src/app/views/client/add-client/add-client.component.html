@@ -1,0 +1,74 @@
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="card-title mb-3">Add new Client</div>
+            <form [formGroup]="formBasic" (ngSubmit)="addClient()">
+                <div class="row">
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="prenom">Prenom</label>
+                        <input formControlName="prenom" type="text" class="form-control form-control-rounded" id="firstName" placeholder="Enterez prénom">
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="nom">Nom</label>
+                        <input formControlName="nom" type="text" class="form-control form-control-rounded" id="lastName" placeholder="Entez nom">
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input formControlName="email" type="email" class="form-control form-control-rounded" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Entez email">
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="phone">Téléphone</label>
+                        <input class="form-control form-control-rounded" id="phone" placeholder="Entez numéro de téléphone">
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="picker1">Profession</label>
+                        <select formControlName="profession" class="form-control form-control-rounded">
+                            <option>Docteur</option>
+                            <option>Ingénieur</option>
+                            <option>Etudiant</option>
+                            <option>Commercial</option>
+                            <option>Cadre</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="password">Mot de passe</label>
+                        <input formControlName="password" class="form-control form-control-rounded" id="password" placeholder="Mot de passe">
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="dateDeNaissance">Date De Naissance</label>
+                        <div class="input-group">
+                            <input formControlName="dateDeNaissance" id="picker1" class="form-control form-control-rounded" placeholder="yyyy-mm-dd" name="dp"
+                                ngbDatepicker #dp="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-rounded" (click)="dp.toggle()" type="button">
+                                    <i class="icon-regular i-Calendar-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="picker1">Categorie</label>
+                        <select formControlName="categorieClient" class="form-control form-control-rounded">
+                            <option>Premium</option>
+                            <option>Ordinaire</option>
+                            <option>Fidele</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesRoutingModule } from '../data-tables/data-tables-routing.module';
 import { ListClientComponent } from './list-client/list-client.component';
 import { ClientRoutingModule } from './client-routing.module';
+import { AddClientComponent } from './add-client/add-client.component';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { ClientRoutingModule } from './client-routing.module';
       ClientRoutingModule
     ],
     declarations: [
-    ListClientComponent
+    ListClientComponent,
+    AddClientComponent
   ]
   })
   export class ClientModule { }

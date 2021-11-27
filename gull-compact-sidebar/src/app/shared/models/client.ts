@@ -2,7 +2,7 @@ export class Client {
     idClient: number; 
     prenom: string; 
     nom: string; 
-    dateDeNaissance: string; 
+    dateDeNaissance: Date; 
     email: string; 
     password: string; 
     profession: string; 
