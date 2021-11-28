@@ -8,6 +8,7 @@ import { DataTablesRoutingModule } from '../data-tables/data-tables-routing.modu
 import { ListClientComponent } from './list-client/list-client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { AddClientComponent } from './add-client/add-client.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { AddClientComponent } from './add-client/add-client.component';
     ],
     declarations: [
     ListClientComponent,
-    AddClientComponent
+    AddClientComponent,
+    ErrorComponent
   ]
   })
   export class ClientModule { }

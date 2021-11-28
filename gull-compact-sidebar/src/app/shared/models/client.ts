@@ -7,5 +7,5 @@ export class Client {
     password: string; 
     profession: string; 
     categorieClient: string; 
-    picture: string; 
+    photo: string; 
 }

@@ -75,10 +75,7 @@
               <span class="item-select">{{item.email}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-              <button class="btn btn-icon bg-transparent"
-              [ngClass]="{'d-none': viewMode === 'grid'}">
-                <i class="i-File-Edit text-16 text-primary"></i>
-              </button>
+                <button class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Delete</button>
             </p>
           </div>
           <div class="align-self-center pl-3 pb-2 pr-3 item-select">

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { ClientService } from 'src/app/shared/services/client.service';
 
@@ -17,13 +19,12 @@ export class ListClientComponent implements OnInit {
   pageSize = 3;
   clients: any[] = [];
 
-  constructor(private clientService: ClientService) { }
+  constructor(private modalService: NgbModal,private clientService: ClientService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.clientService.getClients().subscribe(
       (data) => {
         this.clients = data;
-        console.log(this.clients);
       }
     );
   }
@@ -39,6 +40,24 @@ export class ListClientComponent implements OnInit {
     }
     console.log(this.allSelected);
   }
+
+  
+  deleteClient(id, modal) {
+    
+   /* this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })  
+        .result.then((result) => {
+          console.log('debug1');
+            this.clientService.deleteClient(id)
+                .subscribe(res => {
+                    this.toastr.success('Client supprimé!', 'Success!', { timeOut: 3000 });
+                })
+        }, (reason) => {
+        });*/
+        this.clientService.deleteClient(id)
+                .subscribe(res => {
+                    this.toastr.success('Client supprimé!', 'Success!', { timeOut: 3000 });
+                });
+}
 
 }
 
