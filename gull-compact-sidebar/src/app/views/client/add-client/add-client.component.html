@@ -1,0 +1,91 @@
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="card-title mb-3">Add new Client</div>
+            <form [formGroup]="formBasic" (ngSubmit)="addClient()">
+                <div class="row">
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="prenom">Prenom</label>
+                        <input formControlName="prenom" type="text" class="form-control form-control-rounded" id="firstName" placeholder="Enterez prénom">
+                        <app-error [myError]="f.prenom.errors" *ngIf="f.prenom.invalid && f.prenom.touched"></app-error>
+
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="nom">Nom</label> 
+                        <input formControlName="nom" type="text" class="form-control form-control-rounded" id="lastName" placeholder="Entez nom">
+                        <app-error [myError]="f.nom.errors" *ngIf="f.nom.invalid && f.nom.touched"></app-error>
+                    </div>
+                    
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input formControlName="email" type="email" class="form-control form-control-rounded" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Entez email">
+                                <app-error [myError]="f.email.errors" *ngIf="f.email.invalid && f.email.touched"></app-error>
+
+                    </div>
+
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="picker1">Profession</label>
+                        <select formControlName="profession" class="form-control form-control-rounded">
+                            <option>Docteur</option>
+                            <option>Ingénieur</option>
+                            <option>Etudiant</option>
+                            <option>Commercial</option>
+                            <option>Cadre</option>
+                            <option>Autre</option>
+                        </select>
+                        <app-error [myError]="f.profession.errors" *ngIf="f.profession.invalid && f.profession.touched"></app-error>
+
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="password">Mot de passe</label>
+                        <input formControlName="password" class="form-control form-control-rounded" id="password" placeholder="Mot de passe">
+                        <app-error [myError]="f.password.errors" *ngIf="f.password.invalid && f.password.touched"></app-error>
+
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="dateDeNaissance">Date De Naissance</label>
+                        <div class="input-group">
+                            <input formControlName="dateDeNaissance" id="picker1" class="form-control form-control-rounded" placeholder="yyyy-mm-dd" name="dp"
+                                ngbDatepicker #dp="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-rounded" (click)="dp.toggle()" type="button">
+                                    <i class="icon-regular i-Calendar-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-md-6 form-group mb-3">
+                        <label for="picker1">Categorie</label>
+                        <select formControlName="categorieClient" class="form-control form-control-rounded">
+                            <option>Premium</option>
+                            <option>Ordinaire</option>
+                            <option>Fidele</option>
+                        </select>
+                        <app-error [myError]="f.categorieClient.errors" *ngIf="f.categorieClient.invalid && f.categorieClient.touched"></app-error>
+
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" accept="image/png, .jpeg, .jpg, image/gif" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="onFileSelected($event)">
+                            <label class="custom-file-label" for="inputGroupFile01">Choisir une photo</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button class="btn btn-primary m-1" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -50,6 +50,17 @@ export class NavigationService {
     }
 
     defaultMenu: IMenuItem[] = [
+        {
+            name: 'Clients',
+            description: 'Gestion des clients',
+            type: 'dropDown',
+            icon: 'i-Administrator',
+            sub: [
+                { icon: 'i-Checked-User', name: 'Lister', state: '/client/list', type: 'link' },
+                { icon: 'i-Add-User', name: 'Ajouter', state: '/client/add', type: 'link' },
+                { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
+            ]
+        },
         {   
             name: 'Dashboard',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
