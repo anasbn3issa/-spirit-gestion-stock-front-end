@@ -56,10 +56,8 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Bar-Chart',
             sub: [
-                { icon: 'i-Clock-3', name: 'Version 1', state: '/livreurs/list', type: 'link' },
-                { icon: 'i-Clock-4', name: 'Version 2', state: '/dashboard/v2', type: 'link' },
-                { icon: 'i-Over-Time', name: 'Version 3', state: '/dashboard/v3', type: 'link' },
-                { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
+                { icon: 'i-Add-User', name: 'Ajouter un noveau livreur', state: '/livreurs/add', type: 'link' },
+                { icon: 'i-Clock-3', name: 'Liste des livreurs', state: '/livreurs/list', type: 'link' },
             ]
         },
         {   
