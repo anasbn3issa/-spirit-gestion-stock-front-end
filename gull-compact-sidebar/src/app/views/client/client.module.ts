@@ -9,6 +9,7 @@ import { ListClientComponent } from './list-client/list-client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { AddClientComponent } from './add-client/add-client.component';
 import { ErrorComponent } from '../../shared/error/error.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { ErrorComponent } from '../../shared/error/error.component';
     declarations: [
     ListClientComponent,
     AddClientComponent,
-    ErrorComponent
+    ErrorComponent,
+    ClientProfileComponent
   ]
   })
   export class ClientModule { }

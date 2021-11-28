@@ -75,7 +75,10 @@
               <span class="item-select">{{item.email}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-                <button class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Delete</button>
+              <a class="btn btn-secondary" [routerLink]="['/client/profile',item.idClient]">View</a>
+            </p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+                <a class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Delete</a>
             </p>
           </div>
           <div class="align-self-center pl-3 pb-2 pr-3 item-select">
