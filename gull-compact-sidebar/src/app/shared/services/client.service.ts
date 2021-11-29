@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../models/client';
+import { Purchase } from '../models/purchase';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,12 @@ export class ClientService {
   incomeByClient(id:string){
     return this.myHttp.get('http://localhost:8081/SpringMVC/client/income-from-client/'+id);
     return this.myHttp.get('http://localhost:8089/SpringMVC/client/income-from-client/'+id);
+  }
+
+  purchaseHistoryByClient(id:string) : Observable<Purchase[]>{
+   // return await this.myHttp.get('http://localhost:8081/SpringMVC/client/purchase-history-client/'+id).toPromise();
+    return  this.myHttp.get<Purchase[]>('http://localhost:8081/SpringMVC/client/purchase-history-client/'+id);
+    return this.myHttp.get<Purchase[]>('http://localhost:8089/SpringMVC/client/purchase-history-client/'+id);
   }
 
 }

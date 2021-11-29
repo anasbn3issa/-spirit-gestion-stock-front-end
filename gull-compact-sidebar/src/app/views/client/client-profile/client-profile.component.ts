@@ -2,17 +2,22 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Client } from 'src/app/shared/models/client';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { Purchase } from 'src/app/shared/models/purchase';
+import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 
 
 @Component({
   selector: 'app-client-profile',
   templateUrl: './client-profile.component.html',
-  styleUrls: ['./client-profile.component.scss']
+  styleUrls: ['./client-profile.component.scss'],
+  animations: [SharedAnimations]
+
 })
 export class ClientProfileComponent implements OnInit {
   public client : Client;
   private clientId: string;
   private inComeFromClient: any;
+  purchases: Purchase[] = [];
   constructor(private clientService : ClientService,private route: ActivatedRoute) { }
 
   loadClient() {
@@ -33,9 +38,19 @@ export class ClientProfileComponent implements OnInit {
       }
     );
   }
+  loadPurchaseHistoryFromClient(id:string){
+    this.clientService.purchaseHistoryByClient(id).subscribe(
+      (data)=>{
+        this.purchases=data;
+        //this.purchases.push(data);
+      }
+    );
+  }
   ngOnInit(): void {
     this.loadClient();
     this.loadIncomeFromClient();
+    console.log(this.inComeFromClient);
+     this.loadPurchaseHistoryFromClient(this.clientId);
     
   }
 
