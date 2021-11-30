@@ -28,6 +28,10 @@ export class ClientService {
     return this.myHttp.post('http://localhost:8089/SpringMVC/client/add-client',client);
   }
 
+  updateClient(client:Client){
+    return this.myHttp.put('http://localhost:8081/SpringMVC/client/modify-client',client);
+    return this.myHttp.put('http://localhost:8089/SpringMVC/client/modify-client',client);
+  }
   incomeByClient(id:string){
     return this.myHttp.get('http://localhost:8081/SpringMVC/client/income-from-client/'+id);
     return this.myHttp.get('http://localhost:8089/SpringMVC/client/income-from-client/'+id);

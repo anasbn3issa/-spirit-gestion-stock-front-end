@@ -53,6 +53,33 @@
                                 </div>
                             </div>
                         </li>
+                        <div class="card mb-4">
+                            <div class="card-body p-0">
+                                <div class="card-title border-bottom d-flex align-items-center m-0 p-3">
+                                    <span>Historique d'achats</span>
+                                    <span class="flex-grow-1"></span>
+                                    <span class="badge badge-pill badge-warning">Actualisé quotidiennement</span>
+                                </div>
+                                <div *ngFor="let purchase of purchases; let i = index" >
+                                    <div class="d-flex border-bottom justify-content-between p-3">
+                                        <div class="flex-grow-1 w-25">
+                                            <span class="text-small text-muted">Produit</span>
+                                            <h5 class="m-0">{{purchase.libelle}}</h5>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <span class="text-small text-muted">Code</span>
+                                            <h5 class="m-0">{{purchase.code}}</h5>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <span class="text-small text-muted">Prix Unitaire</span>
+                                            <h5 class="m-0">{{purchase.prixUnitaire}} <strong>DT</strong></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+            
+                            </div>
+                        </div>
                         <div *ngFor="let purchase of purchases; let i = index" >
                             <li class="timeline-item">
                                     <div class="timeline-card card">

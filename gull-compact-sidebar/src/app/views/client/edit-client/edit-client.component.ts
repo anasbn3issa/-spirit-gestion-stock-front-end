@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Client } from 'src/app/shared/models/client';
 import { ClientService } from 'src/app/shared/services/client.service';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  selector: 'app-edit-client',
+  templateUrl: './edit-client.component.html',
+  styleUrls: ['./edit-client.component.scss']
 })
-export class AddClientComponent implements OnInit {
+export class EditClientComponent implements OnInit {
 
   formBasic: FormGroup;
   loading: boolean;
-  radioGroup: FormGroup;
-  toAdd: Client;
-  selectedFile: string;
-  constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private clientService: ClientService) { }
+  toModify : Client;
+  private client: Client;
+  private idClient: string;
+  constructor(private serviceClient :ClientService,private ac: ActivatedRoute,private toastr: ToastrService,private fb: FormBuilder,private router: Router) { }
 
-  ngOnInit(): void {
-    this.buildFormBasic();
-    this.toAdd = new Client();
-    this.selectedFile = null;
-    this.radioGroup = this.fb.group({
-      radio: []
-    });
+
+  loadClient() {
+    this.serviceClient.getClient(this.idClient).subscribe(
+      (client) => {
+        this.client = client;
+        console.log(this.client);
+      }
+    );
   }
 
   
@@ -39,12 +40,20 @@ export class AddClientComponent implements OnInit {
       email: ['',[Validators.required,Validators.required,Validators.email]],
       profession: ['',[Validators.required]],
       categorieClient: ['',[Validators.required]],
-      photo: ['',],
     });
+  }
+
+
+  ngOnInit(): void {
+    this.idClient=this.ac.snapshot.params['id'];
+    this.loadClient();
+    this.buildFormBasic();
+    this.toModify = new Client();
   }
 
   get f() { return this.formBasic.controls; }
 
+  
   success() {
     this.loading = true;
     setTimeout(() => {
@@ -54,6 +63,7 @@ export class AddClientComponent implements OnInit {
     this.router.navigateByUrl('/client/list');
   }
 
+  
   failure() {
     this.loading = true;
     setTimeout(() => {
@@ -62,28 +72,18 @@ export class AddClientComponent implements OnInit {
     }, 1000);
   }
 
-
-  onFileSelected(event) {
-    this.selectedFile= event.target.files[0].name;
-  }
-
-
-  addClient() {
+  updateClient() {
     if (this.formBasic.invalid) {
       this.failure();
       return;
     }
-
-    this.toAdd = this.formBasic.value;
-    this.toAdd.photo= "assets\\images\\faces\\" + this.selectedFile;
-    this.clientService.addClient(this.toAdd).subscribe (res => {
-      console.log('Client created!');
-      console.log(this.toAdd);
-      this.success();
-      //this.router.navigateByUrl('/home');
-    })
-      ;
-    
+    this.toModify= this.formBasic.value;
+    this.serviceClient.updateClient(this.client).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
   }
+ 
 
 }
