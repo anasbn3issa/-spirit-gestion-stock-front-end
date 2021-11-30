@@ -62,15 +62,14 @@ export class NavigationService {
             ]
         },
         {   
-            name: 'Dashboard',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            name: 'Reclamations',
+            description: 'Gestion des reclamations',
             type: 'dropDown',
-            icon: 'i-Bar-Chart',
+            icon: 'i-File-Horizontal-Text',
             sub: [
-                { icon: 'i-Clock-3', name: 'Version 1', state: '/dashboard/v1', type: 'link' },
-                { icon: 'i-Clock-4', name: 'Version 2', state: '/dashboard/v2', type: 'link' },
-                { icon: 'i-Over-Time', name: 'Version 3', state: '/dashboard/v3', type: 'link' },
-                { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
+                { icon: 'i-Clock-3', name: 'Lister ', state: '/reclamation/list', type: 'link' },
+                { icon: 'i-Clock-4', name: 'Ajouter ', state: '/reclamation/add', type: 'link' },
+               
             ]
         },
         {

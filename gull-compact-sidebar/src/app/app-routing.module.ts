@@ -6,9 +6,14 @@ import { BlankLayoutComponent } from './shared/components/layouts/blank-layout/b
 import { AdminLayoutSidebarCompactComponent } from './shared/components/layouts/admin-layout-sidebar-compact/admin-layout-sidebar-compact.component';
 
 const adminRoutes: Routes = [
-    {
+  {
       path: 'client',
       loadChildren: () => import('./views/client/client.module').then(m => m.ClientModule)
+    },
+   
+    {
+      path: 'Reclamation',
+      loadChildren: () => import('./views/reclamation/reclamation.module').then(m => m.ReclamationModule)
     },
     {
       path: 'dashboard',
@@ -72,6 +77,7 @@ const routes: Routes = [
       }
     ]
   },
+ 
   {
     path: '',
     component: BlankLayoutComponent,
@@ -82,6 +88,7 @@ const routes: Routes = [
       }
     ]
   },
+
   {
     path: '',
     component: AdminLayoutSidebarCompactComponent,
@@ -92,6 +99,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'others/404'
   }
+  
 ];
 
 @NgModule({
