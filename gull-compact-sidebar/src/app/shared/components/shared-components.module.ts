@@ -9,10 +9,12 @@ import { SearchModule } from './search/search.module';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { LayoutsModule } from './layouts/layouts.module';
+import { ErrorComponent } from '../error/error.component';
 
 const components = [
   BtnLoadingComponent,
   FeatherIconComponent,
+  ErrorComponent,
 ];
 
 @NgModule({
@@ -24,7 +26,9 @@ const components = [
     SharedDirectivesModule,
     SearchModule,
     PerfectScrollbarModule,
-    NgbModule
+    NgbModule,
+    
+
   ],
   declarations: components,
   exports: components

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
@@ -18,10 +19,18 @@ export class ListClientComponent implements OnInit {
   page = 1;
   pageSize = 3;
   clients: any[] = [];
+  client: any;
 
-  constructor(private modalService: NgbModal,private clientService: ClientService,private toastr: ToastrService) { }
+  constructor(private modalService: NgbModal,
+    private clientService: ClientService,
+    private toastr: ToastrService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+   this.loadClients();
+  }
+  loadClients() {
     this.clientService.getClients().subscribe(
       (data) => {
         this.clients = data;
@@ -41,6 +50,18 @@ export class ListClientComponent implements OnInit {
     console.log(this.allSelected);
   }
 
+  // redirects to route with id parameter
+  viewClient(id: string) {
+    console.log(id);
+    this.clientService.getClient(id).subscribe(
+      (data)=> {
+        this.client=data;
+        console.log('aaaaaaaaa'+data.email);
+      }
+    );
+    this.router.navigate(['/client/profile/' + id]);
+    
+  }
   
   deleteClient(id, modal) {
     
@@ -56,7 +77,8 @@ export class ListClientComponent implements OnInit {
         this.clientService.deleteClient(id)
                 .subscribe(res => {
                     this.toastr.success('Client supprimé!', 'Success!', { timeOut: 3000 });
-                });
+                    this.loadClients();
+                  });
 }
 
 }

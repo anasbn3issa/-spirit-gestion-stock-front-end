@@ -8,7 +8,9 @@ import { DataTablesRoutingModule } from '../data-tables/data-tables-routing.modu
 import { ListClientComponent } from './list-client/list-client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { AddClientComponent } from './add-client/add-client.component';
-import { ErrorComponent } from '../../shared/error/error.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { EditClientComponent } from './edit-client/edit-client.component';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 @NgModule({
     imports: [
@@ -18,12 +20,14 @@ import { ErrorComponent } from '../../shared/error/error.component';
       NgxPaginationModule,
       NgxDatatableModule,
       NgbModule,
-      ClientRoutingModule
+      ClientRoutingModule,
+      SharedComponentsModule
     ],
     declarations: [
     ListClientComponent,
     AddClientComponent,
-    ErrorComponent
+    ClientProfileComponent,
+    EditClientComponent
   ]
   })
   export class ClientModule { }

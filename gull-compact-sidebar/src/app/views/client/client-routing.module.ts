@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddClientComponent } from './add-client/add-client.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { EditClientComponent } from './edit-client/edit-client.component';
 import { ListClientComponent } from './list-client/list-client.component';
 const routes: Routes = [
     {
@@ -10,6 +12,14 @@ const routes: Routes = [
     {
       path: 'add',
       component: AddClientComponent
+    },
+    {
+      path: 'profile/:id',
+      component: ClientProfileComponent
+    },
+    {
+      path: 'edit/:id',
+      component: EditClientComponent
     }
   ];
 
