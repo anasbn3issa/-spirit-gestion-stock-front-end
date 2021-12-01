@@ -11,6 +11,9 @@ import { AddClientComponent } from './add-client/add-client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { IncomeComponent } from './income/income.component';
+import { HighlightDirective } from './highlight.directive';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 
 @NgModule({
     imports: [
@@ -27,7 +30,10 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     ListClientComponent,
     AddClientComponent,
     ClientProfileComponent,
-    EditClientComponent
+    EditClientComponent,
+    IncomeComponent,
+    HighlightDirective,
+    PurchaseHistoryComponent
   ]
   })
   export class ClientModule { }

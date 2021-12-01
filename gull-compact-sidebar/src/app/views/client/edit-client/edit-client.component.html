@@ -6,14 +6,14 @@
                 <div class="row">
                     <div class="col-md-6 form-group mb-3">
                         <label for="prenom">Prenom</label>
-                        <input formControlName="prenom" type="text" class="form-control form-control-rounded" id="firstName" placeholder="Enterez prénom" value="client.prenom">
+                        <input formControlName="prenom" type="text" class="form-control form-control-rounded" id="firstName" placeholder="Enterez prénom">
                         <app-error [myError]="f.prenom.errors" *ngIf="f.prenom.invalid && f.prenom.touched"></app-error>
 
                     </div>
 
                     <div class="col-md-6 form-group mb-3">
                         <label for="nom">Nom</label> 
-                        <input formControlName="nom" type="text" class="form-control form-control-rounded" id="lastName" placeholder="Entez nom" value="client.nom">
+                        <input formControlName="nom" type="text" class="form-control form-control-rounded" id="lastName" placeholder="Entez nom">
                         <app-error [myError]="f.nom.errors" *ngIf="f.nom.invalid && f.nom.touched"></app-error>
                     </div>
                     
@@ -21,7 +21,7 @@
                     <div class="col-md-6 form-group mb-3">
                         <label for="exampleInputEmail1">Email</label>
                         <input formControlName="email" type="email" class="form-control form-control-rounded" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Entez email" value="client.email">
+                            aria-describedby="emailHelp" placeholder="Entez email">
                                 <app-error [myError]="f.email.errors" *ngIf="f.email.invalid && f.email.touched"></app-error>
 
                     </div>
@@ -40,14 +40,6 @@
                         <app-error [myError]="f.profession.errors" *ngIf="f.profession.invalid && f.profession.touched"></app-error>
 
                     </div>
-
-                    <div class="col-md-6 form-group mb-3">
-                        <label for="password">Mot de passe</label>
-                        <input formControlName="password" class="form-control form-control-rounded" id="password" placeholder="Mot de passe">
-                        <app-error [myError]="f.password.errors" *ngIf="f.password.invalid && f.password.touched"></app-error>
-
-                    </div>
-
                     <div class="col-md-6 form-group mb-3">
                         <label for="dateDeNaissance">Date De Naissance</label>
                         <div class="input-group">

@@ -32,9 +32,9 @@ export class AddClientComponent implements OnInit {
   buildFormBasic() {
     this.formBasic = this.fb.group({
       idClient: [''],
-      nom: ['',[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
-      prenom: ['',[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
-      dateDeNaissance: [''],
+      nom: ['',[Validators.required,Validators.pattern("^[a-zA-Z\s]*"),Validators.minLength(3),Validators.maxLength(12)]],
+      prenom: ['',[Validators.required,Validators.pattern("[a-zA-Z\s]*"),Validators.minLength(3),Validators.maxLength(12)]],
+      dateDeNaissance: ['',[Validators.required]],
       password: ['',[Validators.required]],
       email: ['',[Validators.required,Validators.required,Validators.email]],
       profession: ['',[Validators.required]],

@@ -69,10 +69,10 @@
             <a href="" class="">
               <div class="item-title"><strong>{{item.nom}} {{item.prenom}}</strong></div>
             </a>
-            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item.categorieClient}}</p>
-            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item.profession}}</p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100"  appHighlight>{{item.categorieClient}}</p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100" appHighlight>{{item.profession}}</p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
-              <span class="item-select">{{item.email}}</span>
+              <span class="item-select" appHighlight>{{item.email}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
               <a class="btn btn-secondary" [routerLink]="['/client/profile',item.idClient]">Voir Profil</a>

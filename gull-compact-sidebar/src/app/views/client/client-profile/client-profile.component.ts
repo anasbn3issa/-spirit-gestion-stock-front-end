@@ -25,7 +25,6 @@ export class ClientProfileComponent implements OnInit {
     this.clientService.getClient(this.clientId).subscribe(
       (data)=>{
         this.client=data;
-        console.log(this.client);
 
       }
     );
@@ -42,15 +41,13 @@ export class ClientProfileComponent implements OnInit {
     this.clientService.purchaseHistoryByClient(id).subscribe(
       (data)=>{
         this.purchases=data;
-        //this.purchases.push(data);
       }
     );
   }
   ngOnInit(): void {
     this.loadClient();
     this.loadIncomeFromClient();
-    console.log(this.inComeFromClient);
-     this.loadPurchaseHistoryFromClient(this.clientId);
+    this.loadPurchaseHistoryFromClient(this.clientId);
     
   }
 

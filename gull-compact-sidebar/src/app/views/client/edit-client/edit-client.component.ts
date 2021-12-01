@@ -25,6 +25,7 @@ export class EditClientComponent implements OnInit {
       (client) => {
         this.client = client;
         console.log(this.client);
+        this.buildFormBasic();
       }
     );
   }
@@ -32,14 +33,13 @@ export class EditClientComponent implements OnInit {
   
   buildFormBasic() {
     this.formBasic = this.fb.group({
-      idClient: [''],
-      nom: ['',[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
-      prenom: ['',[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
-      dateDeNaissance: [''],
-      password: ['',[Validators.required]],
-      email: ['',[Validators.required,Validators.required,Validators.email]],
-      profession: ['',[Validators.required]],
-      categorieClient: ['',[Validators.required]],
+      idClient: [this.client.idClient],
+      nom: [this.client.nom,[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
+      prenom: [this.client.prenom,[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
+      dateDeNaissance: [this.client.dateDeNaissance],
+      email: [this.client.email,[Validators.required,Validators.required,Validators.email]],
+      profession: [this.client.profession,[Validators.required]],
+      categorieClient: [this.client.categorieClient,[Validators.required]],
     });
   }
 
@@ -47,7 +47,7 @@ export class EditClientComponent implements OnInit {
   ngOnInit(): void {
     this.idClient=this.ac.snapshot.params['id'];
     this.loadClient();
-    this.buildFormBasic();
+    //this.buildFormBasic();
     this.toModify = new Client();
   }
 
@@ -78,6 +78,7 @@ export class EditClientComponent implements OnInit {
       return;
     }
     this.toModify= this.formBasic.value;
+    this.toModify.password = this.client.password;
     this.serviceClient.updateClient(this.client).subscribe(
       (data) => {
         console.log(data);
