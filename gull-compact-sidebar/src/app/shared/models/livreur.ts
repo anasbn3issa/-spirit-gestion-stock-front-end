@@ -3,12 +3,16 @@ export class Livraison{
     type: string;
 }
 
+
 export class Livreur {
-  id: number;
+  idLivreur: number;
   code: string;
   nom: string;
   email: string;
   telephone: number;
   addresse: string;
+  etat: string;
+  dateAdhesion: string;
   livraisonList: Livraison[];
+	isSelected: boolean;
 }

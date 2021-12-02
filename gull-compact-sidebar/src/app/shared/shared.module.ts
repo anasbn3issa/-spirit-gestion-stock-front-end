@@ -21,5 +21,6 @@ import { SharedPipesModule } from './pipes/shared-pipes.module';
     SharedPipesModule,
     RouterModule
   ]
+  
 })
 export class SharedModule { }

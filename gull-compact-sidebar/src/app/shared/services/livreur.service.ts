@@ -29,4 +29,10 @@ export class LivreurService {
   addLivreur(livreur: Livreur): Observable < Livreur > {
     return this.httpClient.post < Livreur > ('http://localhost:8081/SpringMVC/livreurs/add-livreur', livreur, this.httpOptions);
   }
+
+  deleteLivreur(ids: number[]): Observable <any> {
+    const url =  'http://localhost:8081/SpringMVC/livreurs/disable-livreurs';
+    let body= JSON.stringify(ids);
+    return this.httpClient.put < any > (url,ids, this.httpOptions);
+  }
 }

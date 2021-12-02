@@ -63,9 +63,9 @@ export class NavigationService {
         },
         {   
             name: 'Livreur',
-            description: 'Livreur service.',
+            description: 'Gestion des livreurs.',
             type: 'dropDown',
-            icon: 'i-Bar-Chart',
+            icon: 'i-Car-2',
             sub: [
                 { icon: 'i-Add-User', name: 'Ajouter un noveau livreur', state: '/livreurs/add', type: 'link' },
                 { icon: 'i-Clock-3', name: 'Liste des livreurs', state: '/livreurs/list', type: 'link' },
