@@ -82,7 +82,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-this back end helps you use basic CRUD funcs in your managing stock application , plus more advanced functionalities in order to practice typical relations in the market and have more control over your data.
+this front end helps you use basic CRUD funcs in your managing stock application , plus more advanced functionalities in order to practice typical relations in the market and have more control over your data.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -110,7 +110,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-This back-end was developed under the supervision of Mr HAMMOUDA Ghassen , <br>
+This front-end was developed under the supervision of Mr HAMMOUDA Ghassen , <br>
 by spir'IT team.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
