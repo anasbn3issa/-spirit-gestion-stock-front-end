@@ -12,7 +12,7 @@
     <div class="header-cover" style="background-image: url('assets/images/photo-wide-4.jpg')"></div>
     <div class="user-info">
     <img class="profile-picture avatar-lg mb-2" [src]="client.photo" alt="">
-        <p class="profile-title m-0 text-24">{{client.nom}} {{client.prenom}}</p>
+        <p class="profile-title m-0 text-24">{{client.nom}} {{client.prenom}}</p> <button (click)="ChangeshowUpdate()">modifier</button>
         <p class="text-muted m-0">{{client.profession}}</p>
     </div>
     <div class="card-body">
@@ -78,11 +78,7 @@
                         </div>
                     </div>
                     <hr>
-                    <h4>Other Info</h4>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolore labore
-                        reiciendis
-                        ab quo ducimus reprehenderit natus debitis, provident ad iure sed aut animi dolor incidunt
-                        voluptatem. Blanditiis, nobis aut.</p>
+                    <app-edit-client *ngIf="showUpdate" (edited)="sendData($event)"></app-edit-client>
                     
                 </ng-template>
             </ngb-tab>

@@ -5,7 +5,8 @@
       <li>List</li>
     </ul>
   </div>
-  
+  <app-delete-client [id]="idToDelete" (notify)="sendData($event)" *ngIf="openDelete"></app-delete-client>
+
   <div class="separator-breadcrumb border-top"></div>
   <div class="row mb-4">
     <!-- GRID AND LIST BUTTONS -->
@@ -57,6 +58,7 @@
       [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}"
       [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
     >
+
       <div class="card o-hidden mb-4 d-flex" [ngClass]="{'flex-row': viewMode === 'list', 'flex-column': viewMode === 'grid'}">
         <div class="list-thumb d-flex">
           <!-- TUMBNAIL -->

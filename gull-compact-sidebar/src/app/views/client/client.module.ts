@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesRoutingModule } from '../data-tables/data-tables-routing.module';
 import { ListClientComponent } from './list-client/list-client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -14,6 +14,7 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
 import { IncomeComponent } from './income/income.component';
 import { HighlightDirective } from './highlight.directive';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { DeleteClientComponent } from './delete-client/delete-client.component';
 
 @NgModule({
     imports: [
@@ -33,7 +34,9 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     EditClientComponent,
     IncomeComponent,
     HighlightDirective,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    DeleteClientComponent,
+    
   ]
   })
   export class ClientModule { }

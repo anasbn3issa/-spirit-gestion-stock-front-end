@@ -17,6 +17,7 @@ export class ClientProfileComponent implements OnInit {
   public client : Client;
   private clientId: string;
   private inComeFromClient: any;
+  showUpdate : boolean = false;
   purchases: Purchase[] = [];
   constructor(private clientService : ClientService,private route: ActivatedRoute) { }
 
@@ -44,11 +45,17 @@ export class ClientProfileComponent implements OnInit {
       }
     );
   }
+  ChangeshowUpdate() {
+    this.showUpdate = true;
+  }
   ngOnInit(): void {
     this.loadClient();
     this.loadIncomeFromClient();
     this.loadPurchaseHistoryFromClient(this.clientId);
     
+  }
+  sendData(value : Client) {
+    console.log(value);
   }
 
 }

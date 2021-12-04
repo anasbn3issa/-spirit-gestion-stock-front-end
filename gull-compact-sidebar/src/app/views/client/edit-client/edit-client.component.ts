@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,9 @@ export class EditClientComponent implements OnInit {
 
   formBasic: FormGroup;
   loading: boolean;
-  toModify : Client;
+  toModify :Client;
+  @Output() edited = new EventEmitter<Client>();
+
   private client: Client;
   private idClient: string;
   constructor(private serviceClient :ClientService,private ac: ActivatedRoute,private toastr: ToastrService,private fb: FormBuilder,private router: Router) { }
@@ -36,7 +38,7 @@ export class EditClientComponent implements OnInit {
       idClient: [this.client.idClient],
       nom: [this.client.nom,[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
       prenom: [this.client.prenom,[Validators.required,Validators.pattern("[a-zA-Z]*"),Validators.minLength(3)]],
-      dateDeNaissance: [this.client.dateDeNaissance],
+      dateDeNaissance: [this.client.dateNaissance,[Validators.required]],
       email: [this.client.email,[Validators.required,Validators.required,Validators.email]],
       profession: [this.client.profession,[Validators.required]],
       categorieClient: [this.client.categorieClient,[Validators.required]],
@@ -78,9 +80,10 @@ export class EditClientComponent implements OnInit {
       return;
     }
     this.toModify= this.formBasic.value;
-    this.toModify.password = this.client.password;
-    this.serviceClient.updateClient(this.client).subscribe(
+    console.log(this.toModify);
+    this.serviceClient.updateClient(this.toModify).subscribe(
       (data) => {
+        this.edited.emit(this.toModify);
         console.log(data);
       }
     );
