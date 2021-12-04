@@ -107,7 +107,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-This front-end was developed under the supervision of Mr HAMMOUDA Ghassen , <br>
+This front-end was developed under the supervision of Mme ROMMENE Ameni , <br>
 by spir'IT team.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
