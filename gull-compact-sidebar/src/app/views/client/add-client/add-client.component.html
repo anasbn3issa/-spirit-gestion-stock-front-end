@@ -41,12 +41,6 @@
 
                     </div>
 
-                    <div class="col-md-6 form-group mb-3">
-                        <label for="password">Mot de passe</label>
-                        <input formControlName="password" class="form-control form-control-rounded" id="password" placeholder="Mot de passe">
-                        <app-error [myError]="f.password.errors" *ngIf="f.password.invalid && f.password.touched"></app-error>
-
-                    </div>
 
                     <div class="col-md-6 form-group mb-3">
                         <label for="dateDeNaissance">Date De Naissance</label>
@@ -82,7 +76,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        <button class="btn btn-primary m-1" type="submit">Submit</button>
+                        <button [disabled]="formBasic.invalid" class="btn btn-primary m-1" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
