@@ -23,7 +23,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## spirit-gestion-stock-back-end
+## spirit-gestion-stock-front-end
 
 ![logo](https://user-images.githubusercontent.com/47992691/144571774-6aca96ca-604a-4a5b-b89a-05a1fe618720.png)
 
