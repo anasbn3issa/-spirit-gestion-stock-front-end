@@ -35,7 +35,6 @@
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Angular](https://angular.io/)
 
@@ -57,8 +56,6 @@ To get a local copy up and running follow these simple example steps.
  in case you don't have one of the requirements , change on your branch the 'spirit-gestion-stock-back-end/src/main/resources/application.properties' 
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Clone the repo
    ```sh
