@@ -14,7 +14,7 @@
   <p align="center">
     managing stock back end for esprit mini-project developed by spir'IT 2021 
     <br />
-    <a href="https://github.com/anasbn3issa/spirit-gestion-stock-back-end"><strong>Explore our front-end</strong></a>
+    <a href="https://github.com/anasbn3issa/spirit-gestion-stock-back-end"><strong>Explore our back-end</strong></a>
     <br />
     <br />
   </p>
