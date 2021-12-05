@@ -1,0 +1,70 @@
+<ng-template #editModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Modfier livreur</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 form-group mb-3" *ngIf="showPie">
+            <h4>Etat des livraisons</h4>
+            <div echarts [options]="chartPie1" [autoResize]="true" style="height: 200px;"></div>
+        </div>
+        <form [formGroup]="formAddLivreur" (ngSubmit)="submit()">
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <label for="code">Code</label>
+                    <input type="text" formControlName="code" class="form-control form-control-rounded text-uppercase"
+                        id="code" placeholder="Enter your code">
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <label for="code">Etat</label>
+                    <div class="d-flex row ml-2 mt-1">
+                        <label class="radio radio-success col-md-6">
+                            <input type="radio" name="etat" class="form-control" value="Actif" formControlName="etat">
+                            <span>Actif</span>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="radio radio-danger col-md-6">
+                            <input type="radio" name="etat" value="Suspendu" formControlName="etat">
+                            <span>Suspendu</span>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <label for="date">Date Adhesion </label>
+                    <input readonly type="date" formControlName="date" class="form-control form-control-rounded"
+                        id="date" placeholder="date">
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" formControlName="nom" class="form-control form-control-rounded" id="nom"
+                        placeholder="Enter your nom">
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" formControlName="email" class="form-control form-control-rounded" id="email"
+                        aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="telephone">Telephone</label>
+                    <input type="number" formControlName="telephone" class="form-control form-control-rounded"
+                        id="telephone" placeholder="Enter telephone">
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                    <label for="addresse">Addresse</label>
+                    <textarea rows="3" formControlName="addresse" class="form-control form-control-rounded"
+                        id="addresse" placeholder="addresse"></textarea>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-outline-primary btn-rounded" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
