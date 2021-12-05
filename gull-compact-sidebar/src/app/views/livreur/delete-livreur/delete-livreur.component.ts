@@ -20,7 +20,6 @@ export class DeleteLivreurComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.ids)
   }
 
   ngAfterViewInit() {
@@ -35,8 +34,6 @@ export class DeleteLivreurComponent implements OnInit, OnChanges {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
     .result.then((result) => {
       this.livreurService.deleteLivreur(this.ids).subscribe(res=>{
-        console.log("res")
-        console.log(res)
         this.notify.emit(res.result)
         this.modalService.dismissAll(res.result)
       })

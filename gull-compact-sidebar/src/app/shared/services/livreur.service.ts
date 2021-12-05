@@ -8,7 +8,7 @@ import { Livreur } from '../models/livreur';
 })
 export class LivreurService {
 
-  livreursUrl: string = '/api/livreurs'
+  livreursUrl: string = 'http://localhost:8081/SpringMVC/livreurs'
 
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -20,19 +20,27 @@ export class LivreurService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProducts(pageNo: number, pageSize: number): Observable < Livreur[] > {
-    return this.httpClient.get < Livreur[] > ('http://localhost:8081/SpringMVC/livreurs/retrieve-all-livreurs'+
+  getAllLivreurs(pageNo: number, pageSize: number): Observable < Livreur[] > {
+    return this.httpClient.get < Livreur[] > (this.livreursUrl+'/retrieve-all-livreurs'+
     '?pageNo='+pageNo+
     '&pageSize='+pageSize, this.httpOptions)
   }
 
+  getLivreurById(id: number): Observable < Livreur > {
+    return this.httpClient.get < Livreur > (this.livreursUrl + '/retrieve-livreur/' + id);
+  }
+
   addLivreur(livreur: Livreur): Observable < Livreur > {
-    return this.httpClient.post < Livreur > ('http://localhost:8081/SpringMVC/livreurs/add-livreur', livreur, this.httpOptions);
+    return this.httpClient.post < Livreur > (this.livreursUrl+'/add-livreur', livreur, this.httpOptions);
   }
 
   deleteLivreur(ids: number[]): Observable <any> {
-    const url =  'http://localhost:8081/SpringMVC/livreurs/disable-livreurs';
+    const url =  this.livreursUrl+'/disable-livreurs';
     let body= JSON.stringify(ids);
     return this.httpClient.put < any > (url,ids, this.httpOptions);
+  }
+
+  updateLivreur(livreur: Livreur): Observable < Livreur > {
+    return this.httpClient.put < Livreur > (this.livreursUrl + '/modify-livreur',livreur, this.httpOptions);
   }
 }

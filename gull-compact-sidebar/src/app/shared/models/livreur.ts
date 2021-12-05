@@ -1,8 +1,4 @@
-export class Livraison{
-    id: number;
-    type: string;
-}
-
+import { Livraison } from './livraison';
 
 export class Livreur {
   idLivreur: number;

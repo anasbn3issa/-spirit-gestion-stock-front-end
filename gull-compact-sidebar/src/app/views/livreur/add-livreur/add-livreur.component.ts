@@ -37,10 +37,6 @@ export class AddLivreurComponent implements OnInit {
       this.toastr.success('Livreur ajouté.', 'Success!', {progressBar: true});
       this.router.navigateByUrl('/livreurs/list')
     })
-    /*setTimeout(() => {
-      this.loading = false;
-      this.toastr.success('Livreur ajouté.', 'Success!', {progressBar: true});
-    }, 2000);*/
   }
 
 }

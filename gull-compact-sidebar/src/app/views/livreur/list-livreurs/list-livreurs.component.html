@@ -5,7 +5,8 @@
       <li>Liste</li>
     </ul>
   </div>
-  <app-delete-livreur [ids]="ids" (notify)="sendData($event)" *ngIf="openDelete"></app-delete-livreur>
+  <app-delete-livreur [ids]="ids" (notify)="addData($event)" *ngIf="openDelete"></app-delete-livreur>
+  <app-edit-livreur [id]="idToEdit" (notify)="editData($event)" *ngIf="openEdit"></app-edit-livreur>
   <div class="separator-breadcrumb border-top"></div>
   <div class="row mb-4 row">
     <!-- GRID AND LIST BUTTONS -->
@@ -43,7 +44,7 @@
         <div class="btn-group" ngbDropdown role="group" aria-label="Select all" placement="left">
           <button class="btn btn-outline-light btn-rounded" ngbDropdownToggle></button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" (click)="delete()">Delete</button>
+            <button class="dropdown-item" (click)="delete()">Suspendre</button>
           </div>
         </div>
       </div>
@@ -58,10 +59,11 @@
       [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}"
       [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
     >
+
       <div class="card o-hidden mb-4 d-flex" [ngClass]="{'flex-row': viewMode === 'list', 'flex-column': viewMode === 'grid'}">
         <div class="list-thumb d-flex">
           <!-- TUMBNAIL -->
-          <img src="../../assets/images/faces/1.jpg" alt="">
+          <img class="thumbnail" (click)="edit(item.idLivreur)" src="../../assets/images/faces/1.jpg" alt="thumbnail">
         </div>
         <div class="flex-grow-1 " [ngClass]="{'pl-2 d-flex': viewMode === 'list', 'd-bock': viewMode === 'grid'}">
           <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center"
@@ -71,7 +73,7 @@
               <div class="item-title">{{item.nom}}</div>
             </a>
             <a class="w-15 w-sm-100">
-              <span placement="left" ngbPopover="Depuis le {{item.dateAdhesion}}" triggers="mouseenter:mouseleave" *ngIf="item.etat==='Contracté'"class=" badge badge-pill badge-outline-success">{{item.etat}}</span>
+              <span placement="left" ngbPopover="Depuis le {{item.dateAdhesion}}" triggers="mouseenter:mouseleave" *ngIf="item.etat==='Actif'"class=" badge badge-pill badge-outline-success">{{item.etat}}</span>
               <span *ngIf="item.etat==='Suspendu'"class=" badge badge-pill badge-outline-danger w-15">{{item.etat}}</span>
             </a>
             <p class="m-0 text-muted text-small w-15 w-sm-100">{{item?.email}} </p>
@@ -81,7 +83,7 @@
               triggers="mouseenter:mouseleave" class="badge badge-info">{{item?.code}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-              <button class="btn btn-icon bg-transparent"
+              <button (click)="edit(item.idLivreur)" class="btn btn-icon bg-transparent"
               [ngClass]="{'d-none': viewMode === 'grid'}">
                 <i class="i-File-Edit text-16 text-primary"></i>
               </button>
@@ -96,9 +98,15 @@
           </div>
         </div>
       </div>
+
     </div>
     <!-- PAGINATION CONTROL -->
     <div class="col-md-12 mt-3" *ngIf="livreurs?.length">
       <pagination-controls (pageChange)="getPage($event)" previousLabel="" nextLabel=""></pagination-controls>
     </div>
   </div>
+
+
+  <div class="col-md-6">
+  <!--  <div echarts [options]="chartPie1" style="height: 200px;"></div>-->
+</div>

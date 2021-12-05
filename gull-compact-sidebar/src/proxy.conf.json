@@ -1,7 +1,6 @@
 {
-  "/api": {
+  "/api/*": {
     "target": "http://localhost:8081/SpringMVC",
-    "secure": false,
-    "logLevel": "debug"
+    "secure": false
   }
 }
