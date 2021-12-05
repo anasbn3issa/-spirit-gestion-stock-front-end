@@ -5,7 +5,8 @@
       <li>List</li>
     </ul>
   </div>
-  
+  <app-delete-client [id]="idToDelete" (notify)="sendData($event)" *ngIf="openDelete"></app-delete-client>
+
   <div class="separator-breadcrumb border-top"></div>
   <div class="row mb-4">
     <!-- GRID AND LIST BUTTONS -->
@@ -57,6 +58,7 @@
       [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}"
       [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
     >
+
       <div class="card o-hidden mb-4 d-flex" [ngClass]="{'flex-row': viewMode === 'list', 'flex-column': viewMode === 'grid'}">
         <div class="list-thumb d-flex">
           <!-- TUMBNAIL -->
@@ -69,13 +71,19 @@
             <a href="" class="">
               <div class="item-title"><strong>{{item.nom}} {{item.prenom}}</strong></div>
             </a>
-            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item.categorieClient}}</p>
-            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item.profession}}</p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100"  appHighlight>{{item.categorieClient}}</p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100" appHighlight>{{item.profession}}</p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
-              <span class="item-select">{{item.email}}</span>
+              <span class="item-select" appHighlight>{{item.email}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-                <button class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Delete</button>
+              <a class="btn btn-secondary" [routerLink]="['/client/profile',item.idClient]">Voir Profil</a>
+            </p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+              <a class="btn btn-secondary" [routerLink]="['/client/edit',item.idClient]">Modifier</a>
+            </p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+                <a class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Supprimer</a>
             </p>
           </div>
           <div class="align-self-center pl-3 pb-2 pr-3 item-select">

@@ -1,8 +1,10 @@
+<h4>Modifier</h4>
+
 <div class="col-md-12">
     <div class="card mb-4">
         <div class="card-body">
-            <div class="card-title mb-3">Add new Client</div>
-            <form [formGroup]="formBasic" (ngSubmit)="addClient()">
+            <div class="card-title mb-3">Modifier Client</div>
+            <form [formGroup]="formBasic" (ngSubmit)="updateClient()">
                 <div class="row">
                     <div class="col-md-6 form-group mb-3">
                         <label for="prenom">Prenom</label>
@@ -40,8 +42,6 @@
                         <app-error [myError]="f.profession.errors" *ngIf="f.profession.invalid && f.profession.touched"></app-error>
 
                     </div>
-
-
                     <div class="col-md-6 form-group mb-3">
                         <label for="dateDeNaissance">Date De Naissance</label>
                         <div class="input-group">
@@ -68,15 +68,9 @@
 
                     </div>
 
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file" accept="image/png, .jpeg, .jpg, image/gif" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="onFileSelected($event)">
-                            <label class="custom-file-label" for="inputGroupFile01">Choisir une photo</label>
-                        </div>
-                    </div>
 
                     <div class="col-md-12">
-                        <button [disabled]="formBasic.invalid" class="btn btn-primary m-1" type="submit">Submit</button>
+                        <button class="btn btn-primary m-1" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
