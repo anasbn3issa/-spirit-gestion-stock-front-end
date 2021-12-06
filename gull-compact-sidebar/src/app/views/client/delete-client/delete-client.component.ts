@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientService } from 'src/app/shared/services/client.service';
 
@@ -13,7 +14,7 @@ export class DeleteClientComponent implements OnInit {
   @Output() notify = new EventEmitter<string>();
   @ViewChild('modalConfirm',{ static: false }) private modal; 
 
-  constructor(private modalService: NgbModal,private clientService: ClientService) { }
+  constructor(private modalService: NgbModal,private clientService: ClientService, private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.confirm(this.modal)
@@ -30,7 +31,7 @@ export class DeleteClientComponent implements OnInit {
   }
 
   refreshPage() {
-    window.location.reload();
+    this.router.navigateByUrl('/client/list');
    }
   confirm(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
@@ -42,8 +43,11 @@ export class DeleteClientComponent implements OnInit {
       })
 
     }, (reason) => {
-      this.notify.emit(reason)
-      this.modalService.dismissAll(reason)
+      this.notify.emit(reason);
+      this.modalService.dismissAll(reason);
+      this.refreshPage();
+
     });
+
   }
 }

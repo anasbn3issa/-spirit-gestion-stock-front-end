@@ -80,6 +80,7 @@ export class EditClientComponent implements OnInit {
       return;
     }
     this.toModify= this.formBasic.value;
+    this.toModify.photo = this.client.photo;
     console.log(this.toModify);
     this.serviceClient.updateClient(this.toModify).subscribe(
       (data) => {
@@ -87,6 +88,8 @@ export class EditClientComponent implements OnInit {
         console.log(data);
       }
     );
+    this.router.navigateByUrl('/client/list');
+
   }
  
 
