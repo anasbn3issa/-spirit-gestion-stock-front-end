@@ -1,17 +1,17 @@
 <div class="breadcrumb">
-    <h1>List</h1>
+    <h1>Liste</h1>
     <ul>
-      <li><a href="">Data Table</a></li>
-      <li>List</li>
+      <li><a href="">Livreurs</a></li>
+      <li>Liste</li>
     </ul>
   </div>
-  <app-delete-client [id]="idToDelete" (notify)="sendData($event)" *ngIf="openDelete"></app-delete-client>
-
+  <app-delete-livreur [ids]="ids" (notify)="addData($event)" *ngIf="openDelete"></app-delete-livreur>
+  <app-edit-livreur [id]="idToEdit" (notify)="editData($event)" *ngIf="openEdit"></app-edit-livreur>
   <div class="separator-breadcrumb border-top"></div>
-  <div class="row mb-4">
+  <div class="row mb-4 row">
     <!-- GRID AND LIST BUTTONS -->
-    <div class="col-6">
-      <button class="btn btn-sm btn-rounded btn-outline-light btn-svg mr-2" (click)="viewMode = 'grid'">
+    <div class="col-8">
+      <button class="btn btn-sm btn-rounded btn-outline-light btn-svg mr-2" [ngClass]="{active: viewMode === 'grid'}" (click)="viewMode = 'grid'">
         <svg version="1.1" width="16px" id="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 369.946 369.946" style="enable-background:new 0 0 369.946 369.946;" xml:space="preserve">
           <path d="M250.609,0h-11.934H131.271h-11.934H0v119.337v11.934v107.404v11.934v119.337h119.337h11.934
@@ -28,9 +28,11 @@
           <path d="M0,97.92v24.48h612V97.92H0z M0,318.24h612v-24.48H0V318.24z M0,514.08h612V489.6H0V514.08z" />
         </svg>
       </button>
+      <input id="email" placeholder="Search Products" [formControl]="searchControl" style="display: unset!important;" class=" col-4 form-control form-control-rounded ml-2" type="email">
     </div>
+      
     <!-- SELECT CEHECKBOX -->
-    <div class="col-6">
+    <div class="col-4">
       <div class="btn-group float-right">
         <button type="button" class="btn btn-outline-light btn-rounded btn-checkbox">
           <label class="checkbox checkbox-outline-light">
@@ -42,8 +44,7 @@
         <div class="btn-group" ngbDropdown role="group" aria-label="Select all" placement="left">
           <button class="btn btn-outline-light btn-rounded" ngbDropdownToggle></button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item">Delete</button>
-            <button class="dropdown-item">Move to</button>
+            <button class="dropdown-item" (click)="delete()">Suspendre</button>
           </div>
         </div>
       </div>
@@ -53,7 +54,7 @@
   <!-- DATA LIST -->
   <div class="row" [ngClass]="{'list-horizontal': viewMode === 'list', 'list-grid': viewMode === 'grid'}">
     <!-- SINGLE LIST ITEM -->
-    <div *ngFor="let item of clients | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index" 
+    <div *ngFor="let item of livreurs | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems:total }; let i = index" 
       class="list-item"
       [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}"
       [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
@@ -62,42 +63,50 @@
       <div class="card o-hidden mb-4 d-flex" [ngClass]="{'flex-row': viewMode === 'list', 'flex-column': viewMode === 'grid'}">
         <div class="list-thumb d-flex">
           <!-- TUMBNAIL -->
-          <img [src]="item.photo" alt="">
+          <img class="thumbnail" (click)="edit(item.idLivreur)" src="../../assets/images/faces/1.jpg" alt="thumbnail">
         </div>
-        <div class="flex-grow-1" [ngClass]="{'pl-2 d-flex': viewMode === 'list', 'd-bock': viewMode === 'grid'}">
+        <div class="flex-grow-1 " [ngClass]="{'pl-2 d-flex': viewMode === 'list', 'd-bock': viewMode === 'grid'}">
           <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center"
             [ngClass]="{'flex-lg-row': viewMode === 'list'}">
             <!-- OTHER DATA -->
-            <a href="" class="">
-              <div class="item-title"><strong>{{item.nom}} {{item.prenom}}</strong></div>
+            <a href="" class="w-20 w-sm-100">
+              <div class="item-title">{{item.nom}}</div>
             </a>
-            <p class="m-0 text-muted text-small w-15 w-sm-100"  appHighlight>{{item.categorieClient}}</p>
-            <p class="m-0 text-muted text-small w-15 w-sm-100" appHighlight>{{item.profession}}</p>
+            <a class="w-15 w-sm-100">
+              <span placement="left" ngbPopover="Depuis le {{item.dateAdhesion}}" triggers="mouseenter:mouseleave" *ngIf="item.etat==='Actif'"class=" badge badge-pill badge-outline-success">{{item.etat}}</span>
+              <span *ngIf="item.etat==='Suspendu'"class=" badge badge-pill badge-outline-danger w-15">{{item.etat}}</span>
+            </a>
+            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item?.email}} </p>
+            <p class="m-0 text-muted text-small w-15 w-sm-100">{{item?.telephone}}</p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-badges">
-              <span class="item-select" appHighlight>{{item.email}}</span>
+              <span 
+              triggers="mouseenter:mouseleave" class="badge badge-info">{{item?.code}}</span>
             </p>
             <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-              <a class="btn btn-secondary" [routerLink]="['/client/profile',item.idClient]">Voir Profil</a>
-            </p>
-            <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-              <a class="btn btn-secondary" [routerLink]="['/client/edit',item.idClient]">Modifier</a>
-            </p>
-            <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-                <a class="btn btn-outline-danger" (click)="deleteClient(item.idClient, deleteConfirmModal)">Supprimer</a>
+              <button (click)="edit(item.idLivreur)" class="btn btn-icon bg-transparent"
+              [ngClass]="{'d-none': viewMode === 'grid'}">
+                <i class="i-File-Edit text-16 text-primary"></i>
+              </button>
             </p>
           </div>
           <div class="align-self-center pl-3 pb-2 pr-3 item-select">
             <label class="checkbox checkbox-outline-light">
-              <input type="checkbox" [(ngModel)]="item.isSelected">
+              <input type="checkbox" [(ngModel)]="item.isSelected" >
               <span></span>
               <span class="checkmark"></span>
             </label>
           </div>
         </div>
       </div>
+
     </div>
     <!-- PAGINATION CONTROL -->
-    <div class="col-md-12 mt-3" *ngIf="clients?.length">
-      <pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+    <div class="col-md-12 mt-3" *ngIf="livreurs?.length">
+      <pagination-controls (pageChange)="getPage($event)" previousLabel="" nextLabel=""></pagination-controls>
     </div>
   </div>
+
+
+  <div class="col-md-6">
+  <!--  <div echarts [options]="chartPie1" style="height: 200px;"></div>-->
+</div>

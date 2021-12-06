@@ -62,6 +62,16 @@ export class NavigationService {
             ]
         },
         {   
+            name: 'Livreur',
+            description: 'Gestion des livreurs.',
+            type: 'dropDown',
+            icon: 'i-Car-2',
+            sub: [
+                { icon: 'i-Add-User', name: 'Ajouter un noveau livreur', state: '/livreurs/add', type: 'link' },
+                { icon: 'i-Clock-3', name: 'Liste des livreurs', state: '/livreurs/list', type: 'link' },
+            ]
+        },
+        {   
             name: 'Dashboard',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
             type: 'dropDown',
