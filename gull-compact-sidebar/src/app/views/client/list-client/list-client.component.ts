@@ -29,6 +29,7 @@ export class ListClientComponent implements OnInit {
 
   ngOnInit(): void {
    this.loadClients();
+   
   }
   loadClients() {
     this.clientService.getClients().subscribe(
