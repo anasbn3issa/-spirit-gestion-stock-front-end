@@ -84,32 +84,21 @@ export class NavigationService {
             ]
         },
         {
-            name: 'UI kits',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
+            name: 'Stock',
+            description: 'Gestion des stocks',
             type: 'dropDown',
-            icon: 'i-Library',
+            icon: 'i-Shop-2',
             sub: [
-                { icon: 'i-Bell', name: 'Alerts', state: '/uikits/alerts', type: 'link' },
-                { icon: 'i-Split-Horizontal-2-Window', name: 'Accordions', state: '/uikits/accordions', type: 'link' },
-                { icon: 'i-Medal-2', name: 'Badges', state: '/uikits/badges', type: 'link' },
+                { icon: 'i-Shop-2', name: 'Lister les stocks', state: '/stock/list', type: 'link' },
                 {
-                    icon: 'i-Arrow-Right-in-Circle',
-                    name: 'Buttons',
+                    icon: ' i-Add',
+                    name: 'Ajouter..',
                     type: 'dropDown',
                     sub: [
-                        { name: 'Bootstrap Buttons', state: '/uikits/buttons', type: 'link' },
-                        { name: 'Loding Buttons', state: '/uikits/buttons-loading', type: 'link' }
+                        { name: 'Ajouter Stock', state: '/stock/add', type: 'link' },
+                        { name: 'Assigner produit', state: '/uikits/buttons-loading', type: 'link' }
                     ]
-                },
-                { icon: 'i-ID-Card', name: 'Cards', state: '/uikits/cards', type: 'link' },
-                { icon: 'i-Line-Chart-2', name: 'Cards metrics', state: '/uikits/cards-metrics', type: 'link' },
-                { icon: 'i-Credit-Card', name: 'Cards widget', state: '/uikits/cards-widget', type: 'link' },
-                { icon: 'i-Full-Cart', name: 'Cards ecommerce', state: '/uikits/cards-ecommerce', type: 'link' },
-                { icon: 'i-Duplicate-Window', name: 'Modals', state: '/uikits/modals', type: 'link' },
-                { icon: 'i-Speach-Bubble-3', name: 'Popover', state: '/uikits/popover', type: 'link' },
-                { icon: 'i-Like', name: 'Rating', state: '/uikits/rating', type: 'link' },
-                { icon: 'i-Loading-3', name: 'Loaders', state: '/uikits/loaders', type: 'link' },
-            ]
+                }]
         },
         {
             name: 'Apps',
