@@ -1,0 +1,60 @@
+
+  <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+    <a class="btn btn-secondary" (click)="back()">Retour</a>
+</p>
+<p></p>
+
+<div class="breadcrumb">
+    <h1>Stocks</h1>
+    <ul>
+      <li><a href="">Nouveau </a></li>
+      <li>Ajouter</li>
+    </ul>
+  </div>
+
+  <form [formGroup]="formBasic" (ngSubmit)="addStock()">
+
+    <div class="row">
+        <div class="form-group col-md-6 mb-3">
+             <label for="libelleStock">Libelle</label>
+            <input formControlName="libelleStock" type="text" class="form-control" id="libelleStock" name="libelleStock" placeholder="Libelle du stock"
+             >
+             <app-error [myError]="fb.libelleStock.errors" *ngIf="fb.libelleStock.invalid && fb.libelleStock.touched"></app-error>
+          
+          <!--   <input type="text" class="form-control" formControlName="libelleStock">
+            <div class="alert alert-danger" *ngIf="lib.invalid">
+                <div *ngIf="formBasic.get('libelleStock').errors.required"> Obligatoire</div>   
+                <div *ngIf="formBasic.get('libelleStock').errors.pattern"> Pattern!!</div>   
+
+            </div>-->
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+              <label for="qte" class="text-danger font-weight-bold text-uppercase">Quantité actuelle : </label>
+              <input formControlName="qte" type="number" class="form-control" id="libelleStock" placeholder="0" value="0"
+                disabled>
+                <ul>
+                    <li class="text-danger">
+                        Ce champs sera calculé automatiquement ( Produits assignés.)
+                    </li>
+                </ul>
+
+        </div>
+        <div class="form-group col-md-6">
+             <label for="qteMin" >Quantité minimale :</label>
+             <input formControlName="qteMin" type="number" class="form-control" id="qteMin" name="qteMin" placeholder="Nombre de produits minimal"
+             >
+             <app-error [myError]="fb.qteMin.errors" *ngIf="fb.qteMin.invalid && fb.qteMin.touched"></app-error>
+           
+           <!-- <input type="number" class="form-control" formControlName="libelleStock">
+          <div> 
+              <div class="alert alert-danger" *ngIf="formBasic.get('qteMin').errors.required"> Obligatoire</div>   
+         </div> -->
+        </div>
+
+
+        <div class="col-md-12">
+            <button class="btn btn-primary m-1" type="submit">Ajouter!</button>
+        </div>
+    </div>
+</form>
