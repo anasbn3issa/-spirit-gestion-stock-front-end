@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
-import { ClientService } from 'src/app/shared/services/client.service';
 import { StockService } from 'src/app/shared/services/stock.service';
 
 @Component({
@@ -24,8 +23,6 @@ export class ListStockComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     private stockService: StockService,
-    private toastr: ToastrService,
-    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -64,7 +61,6 @@ export class ListStockComponent implements OnInit {
         this.stock=data;
       }
     );
-    //this.router.navigate(['/stock/getstock/' + id]);
     
   }
   
