@@ -10,6 +10,12 @@ import { StockRoutingModule } from './stock-routing.module';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { EditStockComponent } from './edit-stock/edit-stock.component';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { StockdetailComponent } from './stockdetail/stockdetail.component';
+import { StockStatComponent } from './stock-stat/stock-stat.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { PiechartComponent } from './piechart/piechart.component';
+import { ProdSelonTypeComponent } from './prod-selon-type/prod-selon-type.component';
+
 
 @NgModule({
     imports: [
@@ -19,13 +25,19 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
       NgxPaginationModule,
       NgxDatatableModule,
       NgbModule,
+      NgxEchartsModule,
       StockRoutingModule,
-      SharedComponentsModule
+      SharedComponentsModule,
+      CommonModule
     ],
     declarations: [
     ListStockComponent,
     AddStockComponent,
-    EditStockComponent
+    EditStockComponent,
+    StockdetailComponent,
+    StockStatComponent,
+    PiechartComponent,
+    ProdSelonTypeComponent
   ]
   })
   export class StockModule { }

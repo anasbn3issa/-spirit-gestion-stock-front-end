@@ -1,0 +1,111 @@
+<div class="breadcrumb">
+    <h1>Bienvenue à la gestion de Stocks!</h1>
+    <ul>
+      <li>Statistiques </li>
+      <li>Vue d'ensemble</li>
+    </ul>
+  </div>
+<div class="row">
+	<div class="col-lg-6 col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="card-title m-0 text-danger text-center">Rapport MENSUEL</div>
+						<p class="text-small text-muted text-center">Stocks les +/- importants en terme d'argent durant le mois dernier.</p>
+						<div class="row">
+							<div class="col-lg-6 col-md-12 mb-4">
+								
+								<p class="text-24 font-weight-light mb-1"><i class="i-Up text-success"></i> PLUS</p>
+								<p class="text-small text-muted "> Valeur Propre MAXIMALE.</p>
+	
+								<div class="p-4 rounded d-flex align-items-center bg-primary text-white">
+									<i class="i-Thumbs-Up-Smiley text-32 mr-3"></i>
+									<div>
+										<h4 class="text-18 mb-1 text-white">{{plusR.libelleStock}}</h4>
+										<p>Stock le</p>
+										<p> +plus Rentable</p>
+										
+									</div>
+								</div>
+							</div>
+					
+						
+							<div class="col-lg-6 col-md-12 mb-4">
+								<p class="text-24 font-weight-light mb-1"><i class="i-Down text-danger"></i> MOINS</p>
+								<p class="text-small text-muted"> Valeur Propre MINIMALE</p>
+						
+							
+								<div class="p-4 border border-light rounded d-flex align-items-center bg-danger text-white">
+									<i class="i-Thumbs-Down-Smiley text-32 mr-3"></i>
+									<div>
+										<h4 class="text-18 mb-1 text-white">{{moinsR.libelleStock}}</h4>
+										<p>Stock le </p>
+										<p>-moins Rentable!</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    
+	<div class="col-lg-6 col-md-12">
+		<div class="row">
+			<div class="col-md-6 mb-4">
+				<div class="card">
+					<div class="card-body">
+						<h6 class="mb-0 text-muted"> </h6>
+						<p class="text-24 font-weight-light mb-1 text-center">Categories</p><p></p>
+						<p></p>
+						<p class="text-small text-muted text-center">Des produits existants.</p>
+						
+						<table class="table">
+                 
+							<tbody>
+							  <tr>
+								<td style="color: #4CAF50;">1 </td>
+								<td class="font-weight-bold"  > <button class="btn btn-secondary" > Alimentaire</button></td>
+							  </tr>
+							  <tr>
+								<td style="color: #df0029;">2 </td>
+								<td class="font-weight-bold" ><button class="btn btn-secondary" > Electromenager</button></td>
+							  </tr>
+							  <tr>
+								<td style="color: #CF1CC9;">3 </td>
+								<td class="font-weight-bold" ><button class="btn btn-secondary"> Quincaillerie</button></td>
+							  </tr>                    
+							  
+							</tbody>
+						  </table>
+					</div>
+				</div>
+			</div>
+
+            <div class="col-md-6">
+				<div class="card mb-4">
+					<!--<a class="btn btn-primary text-white " (click)="loadChart(alimentaire,electro,quicaillerie)">Voir Statistiques</a>-->
+					<p></p>
+					<div class="card-body text-center">
+						<h6 class="mb-0 text-muted">Statistiques des produits disponibles selon catégorie.</h6>
+						<p class="text-18 font-weight-light mb-1 text-center">{{alimentaire}} % | {{electro}} % | {{quicaillerie}} %</p>
+						<p></p>
+						<p></p>
+					<!--	<div echarts [options]="chartPie1" style="height: 140px;"></div>-->
+					<app-piechart [alim]="alimentaire" [quic]="quicaillerie" [elect]="electro" ></app-piechart>
+						<p></p>
+						<p> </p>
+						<p></p>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		
+        </div>
+    </div>
+</div>
+<app-list-stock></app-list-stock>
+    

@@ -14,7 +14,7 @@
   <p align="center">
     managing stock back end for esprit mini-project developed by spir'IT 2021 
     <br />
-    <a href="https://github.com/anasbn3issa/spirit-gestion-stock-back-end"><strong>Explore our front-end</strong></a>
+    <a href="https://github.com/anasbn3issa/spirit-gestion-stock-back-end"><strong>Explore our back-end</strong></a>
     <br />
     <br />
   </p>
@@ -23,7 +23,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## spirit-gestion-stock-back-end
+## spirit-gestion-stock-front-end
 
 ![logo](https://user-images.githubusercontent.com/47992691/144571774-6aca96ca-604a-4a5b-b89a-05a1fe618720.png)
 
@@ -35,7 +35,6 @@
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Angular](https://angular.io/)
 
@@ -58,11 +57,9 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```sh
-   git clone https://github.com/anasbn3issa/spirit-gestion-stock-back-end.git
+   git clone https://github.com/WajdiSd/-spirit-gestion-stock-front-end.git
    ```
 2. Install NPM packages
    ```sh
@@ -110,7 +107,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-This front-end was developed under the supervision of Mr HAMMOUDA Ghassen , <br>
+This front-end was developed under the supervision of Mme ROMMENE Ameni , <br>
 by spir'IT team.
 
 <p align="right">(<a href="#top">back to top</a>)</p>

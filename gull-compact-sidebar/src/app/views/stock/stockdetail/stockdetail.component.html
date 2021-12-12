@@ -1,8 +1,64 @@
 
     <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
-        <a class="btn btn-secondary" (click)="back()">Retour</a>
+        <a class="btn btn-primary text-white" (click)="back()">Retour</a>
     </p>
-    <p></p>
+   <p></p>
+   <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row">
+      <!-- ICON BG -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+              <div class="card-body text-center">
+                  <i class="i-Money"></i>
+                  <div class="content">
+                      <p class="text-muted mt-2 mb-0">Valeur</p>
+                      <p class="text-primary text-24 line-height-1 mb-2">{{valS}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+              <div class="card-body text-center">
+                  <i class="i-Financial"></i>
+                  <div class="content">
+                      <p class="text-muted mt-2 mb-0">Revenu</p>
+                      <p class="text-primary text-24 line-height-1 mb-2">{{valPS}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4" >
+              <div class="card-body text-center">
+                  <i class="i-Checkout-Basket" [ngStyle]="{'color' : stock.qteMin > stock.qte ? 'red' : 'green'}"></i>
+                  <div class="content">
+                      <p class=" mt-2 mb-0 " [ngStyle]="{'color' : stock.qteMin > stock.qte ? 'red' : 'green'}">Quantite</p>
+                      <p class=" text-24 line-height-1 mb-2" [ngStyle]="{'color' : stock.qteMin > stock.qte ? 'red' : 'green'}">{{stock.qte}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
+              <div class="card-body text-center">
+                  <i class="i-Money-2"></i>
+                  <div class="content">
+                      <p class="text-muted mt-2 mb-0">TVA</p>
+                      <p class="text-primary text-24 line-height-1 mb-2">{{TVA}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+  <div class="separator-breadcrumb border-top"></div>
+
+
     <div class=" col-md-12">
         <div class="card mb-4">
           <div class="card-body">
@@ -29,21 +85,24 @@
                 </table>
                 <!--Products-->
                 <a class="text-danger text-uppercase">Produits : </a>
-                <table>
-                  <tr></tr>
-                <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
-                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/headphone-4.jpg" alt="">
+                <div *ngFor="let p of products" class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
+                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/product1.png" alt="">
                   <div class="flex-grow-1">
-                      <h5 class=""><a href="">Wireless Headphone E23</a></h5>
-                      <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
+                    <h5 class=""><a href="">{{p.code}}</a></h5>
+                    <p class="m-0 text-small text-muted">{{p.libelle}}.</p>
+                    <p class="text-small text-danger m-0">{{p.prixUnitaire}}</p>
+                    <div>
+                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm" (click)="deleteProd(p.idProduit)">Ejecter</button>
                   </div>
+                  </div>
+                 
+                
+                  <!-- DETAILS DU PRODUIT
                   <div>
-                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">View details</button>
+                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm"></button>
                   </div>
-                  
+                  -->
               </div>
-            </table>
               
               </div>
               <div class="col-md-6">
@@ -54,55 +113,39 @@
         </div>
       
         <div class="card mb-4">
-          <div class="card-body">
-              <div class="card-title">Produits</div>
-              <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
-                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/headphone-4.jpg" alt="">
-                  <div class="flex-grow-1">
-                      <h5 class=""><a href="">Wireless Headphone E23</a></h5>
-                      <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
-                  </div>
-                  <div>
-                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">View details</button>
-                  </div>
-              </div>
-              <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
-                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/headphone-2.jpg" alt="">
-                  <div class="flex-grow-1">
-                      <h5 class=""><a href="">Wireless Headphone Y902</a></h5>
-                      <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <p class="text-small text-danger m-0">$550 <del class="text-muted">$600</del></p>
-                  </div>
-                  <div>
-                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-sm btn-rounded">View details</button>
-                  </div>
-              </div>
-              <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
-                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/headphone-3.jpg" alt="">
-                  <div class="flex-grow-1">
-                      <h5 class=""><a href="">Wireless Headphone E09</a></h5>
-                      <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <p class="text-small text-danger m-0">$250 <del class="text-muted">$300</del></p>
-                  </div>
-                  <div>
-                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-sm btn-rounded">View details</button>
-                  </div>
-              </div>
-              <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
-                  <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/headphone-4.jpg" alt="">
-                  <div class="flex-grow-1">
-                      <h5 class=""><a href="">Wireless Headphone X89</a></h5>
-                      <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
-                  </div>
-                  <div>
-                      <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-sm btn-rounded">View details</button>
-                  </div>
-              </div>
-          </div>
+            <div class="card-body">
+                <div class="card-title">Produits disponibles..</div>
+                <div *ngFor="let pn of productsNonAss" class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
+                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/product1.png" alt="product">
+                    <div class="flex-grow-1">
+                        <h5 class=""><a href="">{{pn.code}}</a></h5>
+                        <p class="m-0 text-small text-muted">{{pn.libelle}}</p>
+                        <p class="text-small text-danger m-0">{{pn.prixUnitaire}}</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm" (click)="assignerProduit(pn.idProduit)">Assigner ce produit..</button>
+                    </div>
+                </div>
+            
+            </div>
+</div>
+            
+        <div class="card mb-4">
+            <div class="card-body bg-primary">
+                <div class="card-title text-white">Existe également dans d'autres stocks..</div>
+                <div *ngFor="let a of autres" class="d-flex flex-column flex-sm-row align-items-sm-center mb-3">
+                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="./assets/images/products/product.png" alt="product">
+                    <div class="flex-grow-1">
+                        <h5 class=" text-white"><a>{{a.code}}</a></h5>
+                        <p class="m-0 text-small text-white">{{a.libelle}}</p>
+                        <p class="text-small text-white m-0">{{a.prixUnitaire}}</p>
+                    </div>
+                    
+                </div>
+            
+            </div>
+
+
       </div>
 
-
-      
       </div>

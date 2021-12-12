@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddClientComponent } from './add-client/add-client.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { DeleteClientComponent } from './delete-client/delete-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { ListClientComponent } from './list-client/list-client.component';
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
       path: 'edit/:id',
       component: EditClientComponent
+    },
+    {
+      path: 'delete/:id',
+      component: DeleteClientComponent
     }
   ];
 

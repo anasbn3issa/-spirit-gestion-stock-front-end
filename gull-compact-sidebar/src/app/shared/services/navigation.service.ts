@@ -62,6 +62,16 @@ export class NavigationService {
             ]
         },
         {   
+            name: 'Livreur',
+            description: 'Gestion des livreurs.',
+            type: 'dropDown',
+            icon: 'i-Car-2',
+            sub: [
+                { icon: 'i-Add-User', name: 'Ajouter un noveau livreur', state: '/livreurs/add', type: 'link' },
+                { icon: 'i-Clock-3', name: 'Liste des livreurs', state: '/livreurs/list', type: 'link' },
+            ]
+        },
+        {   
             name: 'Dashboard',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
             type: 'dropDown',
@@ -79,6 +89,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Shop-2',
             sub: [
+                { icon: 'i-Pie-Chart-2', name: 'Statistiques', state: '/stock/stat', type: 'link' },
                 { icon: 'i-Shop-2', name: 'Lister les stocks', state: '/stock/list', type: 'link' },
                 {
                     icon: ' i-Add',
@@ -86,7 +97,6 @@ export class NavigationService {
                     type: 'dropDown',
                     sub: [
                         { name: 'Ajouter Stock', state: '/stock/add', type: 'link' },
-                        { name: 'Assigner produit', state: '/uikits/buttons-loading', type: 'link' }
                     ]
                 }]
         },
