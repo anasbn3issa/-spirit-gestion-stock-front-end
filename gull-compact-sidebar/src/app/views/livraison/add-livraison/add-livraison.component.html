@@ -12,7 +12,7 @@
   <div class="col-md-12">
 
     <form-wizard>
-      <wizard-step [title]="'Choix Facture'" [isValid]="factForm.form.valid" (onNext)="onStep1Next($event)">
+      <wizard-step [title]="'Choix Facture'" [isValid]="selectedFacture!=null" (onNext)="onStep1Next($event)">
         <form #factForm="ngForm">
 
           <div class="row">
@@ -28,7 +28,7 @@
           </div>
         </form>
       </wizard-step>
-      <wizard-step [title]="'Choix Livreur'" [isValid]="livrForm.valid" (onNext)="onStep2Next($event)">
+      <wizard-step [title]="'Choix Livreur'" [isValid]="selectedLivreur!=null" (onNext)="onStep2Next($event)">
         <form #livrForm="ngForm">
           <div class="row">
             <div class="col-md-2 card-title">Choix Livreur</div>

@@ -12,12 +12,16 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wizard.module';
 import { ListLivraisonComponent } from './list-livraison/list-livraison.component';
+import { EditLivraisonComponent } from './edit-livraison/edit-livraison.component';
+import { DeleteLivraisonComponent } from './delete-livraison/delete-livraison.component';
 
 
 @NgModule({
   declarations: [
     AddLivraisonComponent,
-    ListLivraisonComponent
+    ListLivraisonComponent,
+    EditLivraisonComponent,
+    DeleteLivraisonComponent
   ],
   imports: [
     CommonModule,

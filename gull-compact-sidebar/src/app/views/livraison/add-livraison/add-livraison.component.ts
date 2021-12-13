@@ -50,7 +50,7 @@ export class AddLivraisonComponent implements OnInit {
           this.finalMsg = 'Merci! Vous avez terminé toutes les étapes.'
           setTimeout(() => {
             this.router.navigateByUrl('/livraison/list')
-          }, 1500);
+          }, 1000);
         }
     })
     }
