@@ -1,3 +1,9 @@
-export class Produit {
-   
+export class Produit { 
+    idProduit: number;
+    code: string;
+    libelle: string;
+    prixUnitaire: number;
+    idStock: number;
+    idRayon: number;
+    idDetailProduit: number;
 }

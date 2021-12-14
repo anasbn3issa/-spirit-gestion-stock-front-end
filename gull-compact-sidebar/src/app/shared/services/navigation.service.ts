@@ -99,6 +99,7 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Shop-2',
             sub: [
+                { icon: 'i-Pie-Chart-2', name: 'Statistiques', state: '/stock/stat', type: 'link' },
                 { icon: 'i-Shop-2', name: 'Lister les stocks', state: '/stock/list', type: 'link' },
                 {
                     icon: ' i-Add',
@@ -106,7 +107,6 @@ export class NavigationService {
                     type: 'dropDown',
                     sub: [
                         { name: 'Ajouter Stock', state: '/stock/add', type: 'link' },
-                        { name: 'Assigner produit', state: '/uikits/buttons-loading', type: 'link' }
                     ]
                 }]
         },
