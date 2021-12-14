@@ -16,6 +16,7 @@
                     <label for="code">Code</label>
                     <input type="text" formControlName="code" class="form-control form-control-rounded text-uppercase"
                         id="code" placeholder="Enter your code">
+                    <app-error [myError]="controls.code.errors" *ngIf="controls.code.invalid && controls.code.touched"></app-error>
                 </div>
 
                 <div class="col-md-6 form-group mb-3">
@@ -44,27 +45,32 @@
                     <label for="nom">Nom</label>
                     <input type="text" formControlName="nom" class="form-control form-control-rounded" id="nom"
                         placeholder="Enter your nom">
+                    <app-error [myError]="controls.nom.errors" *ngIf="controls.nom.invalid && controls.nom.touched"></app-error>
                 </div>
+
                 <div class="col-md-6 form-group mb-3">
                     <label for="email">Email</label>
                     <input type="email" formControlName="email" class="form-control form-control-rounded" id="email"
                         aria-describedby="emailHelp" placeholder="Enter email">
+                        <app-error [myError]="controls.email.errors" *ngIf="controls.email.invalid && controls.email.touched"></app-error>
                 </div>
                 <div class="col-md-6 form-group mb-3">
                     <label for="telephone">Telephone</label>
-                    <input type="number" formControlName="telephone" class="form-control form-control-rounded"
+                    <input type="text" formControlName="telephone" class="form-control form-control-rounded"
                         id="telephone" placeholder="Enter telephone">
+                        <app-error [myError]="controls.telephone.errors" *ngIf="controls.telephone.invalid && controls.telephone.touched"></app-error>
                 </div>
                 <div class="col-md-12 form-group mb-3">
                     <label for="addresse">Addresse</label>
                     <textarea rows="3" formControlName="addresse" class="form-control form-control-rounded"
                         id="addresse" placeholder="addresse"></textarea>
+                        <app-error [myError]="controls.addresse.errors" *ngIf="controls.addresse.invalid && controls.addresse.touched"></app-error>
                 </div>
             </div>
         </form>
 
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" *ngIf="formAddLivreur.valid">
         <button class="btn btn-outline-primary btn-rounded" (click)="modal.close('Save click')">Save</button>
     </div>
 </ng-template>

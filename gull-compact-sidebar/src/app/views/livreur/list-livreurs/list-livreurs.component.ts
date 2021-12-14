@@ -1,9 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { LivreurService } from 'src/app/shared/services/livreur.service';
-import { Livreur } from 'src/app/shared/models/livreur';
-import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
-import { FormControl } from '@angular/forms';
-import { echartStyles } from 'src/app/shared/echart-styles';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  LivreurService
+} from 'src/app/shared/services/livreur.service';
+import {
+  Livreur
+} from 'src/app/shared/models/livreur';
+import {
+  SharedAnimations
+} from 'src/app/shared/animations/shared-animations';
+import {
+  FormControl
+} from '@angular/forms';
+import {
+  echartStyles
+} from 'src/app/shared/echart-styles';
 
 
 @Component({
@@ -14,12 +27,13 @@ import { echartStyles } from 'src/app/shared/echart-styles';
 })
 export class ListLivreursComponent implements OnInit {
 
-viewMode: 'list' | 'grid' = 'list';
+  viewMode: 'list' | 'grid' = 'list';
   allSelected: boolean;
   page = 1;
   pageSize = 8;
   total: number
   idToEdit: number
+  filter: string
   livreurs: Livreur[] = [];
   ids: number[] = []
   searchControl: FormControl = new FormControl();
@@ -28,38 +42,49 @@ viewMode: 'list' | 'grid' = 'list';
   chartPie1: any;
 
 
-  constructor( private livreurService : LivreurService) { 
+  constructor(private livreurService: LivreurService) {
     this.openDelete = false
+    this.filter = ""
   }
 
   ngOnInit(): void {
     this.getPage(1)
     this.chartPie1 = {
-			...echartStyles.defaultOptions, ...{
+      ...echartStyles.defaultOptions,
+      ...{
         legend: {
           show: true,
         },
-				series: [{
+        series: [{
           type: 'pie',
           ...echartStyles.pieRing,
 
           label: echartStyles.pieLabelCenterHover,
-					data: [{
-						name: 'Completed',
-						value: 80,
-						itemStyle: {
-							color: '#663399',
-						}
-					}, {
-						name: 'Pending',
-						value: 20,
-						itemStyle: {
-							color: '#ced4da',
-						}
-					}]
-				}]
-			}
+          data: [{
+            name: 'Completed',
+            value: 80,
+            itemStyle: {
+              color: '#663399',
+            }
+          }, {
+            name: 'Pending',
+            value: 20,
+            itemStyle: {
+              color: '#ced4da',
+            }
+          }]
+        }]
+      }
     };
+
+    this.searchControl.valueChanges
+      .subscribe(term => {
+        this.filter = term;
+        this.ids = []
+        this.livreurs = []
+        this.page = 1
+        this.getPage(this.page)
+      });
   }
 
   selectAll(e) {
@@ -69,11 +94,10 @@ viewMode: 'list' | 'grid' = 'list';
     });
   }
 
-  delete(){
+  delete() {
     this.ids = []
-    this.livreurs.filter(l=>{
-      if (l.isSelected)  
-      {
+    this.livreurs.filter(l => {
+      if (l.isSelected) {
         this.ids.push(l.idLivreur)
         console.log(this.ids)
       }
@@ -83,7 +107,7 @@ viewMode: 'list' | 'grid' = 'list';
     this.openDelete = true
   }
 
-  edit(id : number){
+  edit(id: number) {
     this.idToEdit = id
     console.log(this.idToEdit)
     this.openEdit = !this.openEdit
@@ -91,9 +115,9 @@ viewMode: 'list' | 'grid' = 'list';
     console.log(this.openEdit)
   }
 
-  addData(value : string){
+  addData(value: string) {
     console.log(value)
-    if(value==="update successful"){
+    if (value === "update successful") {
       this.ids = []
       this.livreurs = []
       this.page = 1
@@ -102,10 +126,10 @@ viewMode: 'list' | 'grid' = 'list';
     }
   }
 
-  editData(value : Livreur){
+  editData(value: Livreur) {
     this.openEdit = false
-    if(value.idLivreur ==this.idToEdit){
-      this.idToEdit =0
+    if (value.idLivreur == this.idToEdit) {
+      this.idToEdit = 0
       this.ids = []
       this.livreurs = []
       this.page = 1
@@ -115,13 +139,13 @@ viewMode: 'list' | 'grid' = 'list';
 
   getPage(page: number) {
     this.page = page
-    this.livreurService.getAllLivreurs(page-1,8).subscribe(res=>{
+    this.livreurService.getAllLivreurs(page - 1, 8, this.filter).subscribe(res => {
       console.log(res)
       this.livreurs = res
       this.livreurs = res['livreurs']
       this.total = res['total']
     })
-}
+  }
 
 
 }

@@ -17,6 +17,10 @@ export class ErrorComponent implements OnInit {
     else if (changes.myError.currentValue.minlength){
       this.myError="ce champ doit contenir au moins"+changes.myError.currentValue.minlength.requiredLength+" caractères";
     }
+    else if (changes.myError.currentValue.maxlength){
+      this.myError="ce champ ne doit pas dépasser "+changes.myError.currentValue.maxlength.requiredLength+" caractères";
+    }
+    
     else if (changes.myError.currentValue.pattern!=null){
       this.myError="ce champ doit suivre un certain modèle";
     }

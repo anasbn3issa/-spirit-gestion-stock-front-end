@@ -20,10 +20,16 @@ export class LivreurService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllLivreurs(pageNo: number, pageSize: number): Observable < Livreur[] > {
+  getAllLivreurs(pageNo: number, pageSize: number, filter: string): Observable < Livreur[] > {
     return this.httpClient.get < Livreur[] > (this.livreursUrl+'/retrieve-all-livreurs'+
     '?pageNo='+pageNo+
-    '&pageSize='+pageSize, this.httpOptions)
+    '&pageSize='+pageSize
+    +'&filter='+filter
+    , this.httpOptions)
+  }
+
+  getActiveLivreurs(): Observable < Livreur[] > {
+    return this.httpClient.get < Livreur[] > (this.livreursUrl+'/retrieve-active-livreurs', this.httpOptions)
   }
 
   getLivreurById(id: number): Observable < Livreur > {

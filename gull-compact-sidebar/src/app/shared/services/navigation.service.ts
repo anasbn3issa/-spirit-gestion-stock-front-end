@@ -61,6 +61,16 @@ export class NavigationService {
                 { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
             ]
         },
+        {
+            name: 'Livraison',
+            description: 'Gestion des livraisons',
+            type: 'dropDown',
+            icon: 'i-Shopping-Basket',
+            sub: [
+                { icon: 'i-Checkout-Basket', name: 'Assigner livreur à une facture', state: '/livraison/add', type: 'link' },
+                { icon: 'i-Full-Basket', name: 'Lister les livraison', state: '/livraison/list', type: 'link' },
+            ]
+        },
         {   
             name: 'Livreur',
             description: 'Gestion des livreurs.',

@@ -1,0 +1,71 @@
+<div class="breadcrumb">
+  <h1>Form Wizard</h1>
+  <ul>
+    <li><a href="">Form</a></li>
+    <li>Wizard</li>
+  </ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <form-wizard>
+      <wizard-step [title]="'Choix Facture'" [isValid]="selectedFacture!=null" (onNext)="onStep1Next($event)">
+        <form #factForm="ngForm">
+
+          <div class="row">
+            <div class="col-md-2 card-title">Choix Facture</div>
+
+            <div class="col-md-6 form-group mb-3">
+              <select class="form-control" [(ngModel)]="selectedFacture" name="fact">
+                <option *ngFor="let f of factures" [ngValue]="f.idFacture" >{{f.idFacture}}</option>
+
+              </select>
+            </div>
+
+          </div>
+        </form>
+      </wizard-step>
+      <wizard-step [title]="'Choix Livreur'" [isValid]="selectedLivreur!=null" (onNext)="onStep2Next($event)">
+        <form #livrForm="ngForm">
+          <div class="row">
+            <div class="col-md-2 card-title">Choix Livreur</div>
+
+            <div class="col-md-6 form-group mb-3">
+              <select class="form-control" [(ngModel)]="selectedLivreur" name="livs">
+                <option *ngFor="let l of livreurs" [ngValue]="l.idLivreur">{{l.nom}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </wizard-step>
+
+      <wizard-step [title]="'Option Paiement'" (onNext)="onStep3Next($event)">
+        <div class="card-title">Option Paiement</div>
+        <div class="row">
+          
+        <label class="radio radio-primary col-md-4 offset-2">
+          <input checked="true" type="radio" name="radio" [value]="1">
+          <span>Sur place</span>
+          <span class="checkmark"></span>
+        </label>
+        <label class="radio radio-primary col-md-4">
+          <input disabled="true" type="radio" name="radio" [value]="2">
+          <span>En ligne (Stripe)</span>
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      </wizard-step>
+
+      <wizard-step [title]="'Terminer'" (onComplete)="onComplete($event)">
+        <div class="text-center mt-4 mb-4">
+          <i class="i-Checked-User text-32 mb-3 text-success d-inline-block"></i>
+          <h5 class="font-weight-light">{{finalMsg}}</h5>
+        </div>
+      </wizard-step>
+    </form-wizard>
+
+  </div>
+</div>
