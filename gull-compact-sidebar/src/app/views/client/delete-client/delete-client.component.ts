@@ -39,14 +39,11 @@ export class DeleteClientComponent implements OnInit {
         this.clientService.deleteClient(this.id).subscribe(res=>{
         this.notify.emit(res.valueOf().toString());
         this.modalService.dismissAll(res.valueOf().toString());
-        this.refreshPage();
       })
 
     }, (reason) => {
       this.notify.emit(reason);
       this.modalService.dismissAll(reason);
-      this.refreshPage();
-
     });
 
   }

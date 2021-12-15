@@ -58,7 +58,6 @@ export class NavigationService {
             sub: [
                 { icon: 'i-Checked-User', name: 'Lister', state: '/client/list', type: 'link' },
                 { icon: 'i-Add-User', name: 'Ajouter', state: '/client/add', type: 'link' },
-                { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
             ]
         },
         {
@@ -81,18 +80,6 @@ export class NavigationService {
                 { icon: 'i-Clock-3', name: 'Liste des livreurs', state: '/livreurs/list', type: 'link' },
             ]
         },
-        {   
-            name: 'Dashboard',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Bar-Chart',
-            sub: [
-                { icon: 'i-Clock-3', name: 'Version 1', state: '/dashboard/v1', type: 'link' },
-                { icon: 'i-Clock-4', name: 'Version 2', state: '/dashboard/v2', type: 'link' },
-                { icon: 'i-Over-Time', name: 'Version 3', state: '/dashboard/v3', type: 'link' },
-                { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
-            ]
-        },
         {
             name: 'Stock',
             description: 'Gestion des stocks',
@@ -110,88 +97,7 @@ export class NavigationService {
                     ]
                 }]
         },
-        {
-            name: 'Apps',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Computer-Secure',
-            sub: [
-                { icon: 'i-Add-File', name: 'Invoice Builder', state: '/invoice', type: 'link' },
-                { icon: 'i-Email', name: 'Inbox', state: '/inbox', type: 'link' },
-                { icon: 'i-Speach-Bubble-3', name: 'Chat', state: '/chat', type: 'link' },
-                { icon: 'i-Calendar', name: 'Calendar', state: '/calendar', type: 'link' },
-            ]
-        },
-        {
-            name: 'Forms',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-File-Clipboard-File--Text',
-            sub: [
-                { icon: 'i-File-Clipboard-Text--Image', name: 'Basic components', state: '/forms/basic', type: 'link' },
-                { icon: 'i-Split-Vertical', name: 'Form layouts', state: '/forms/layouts', type: 'link' },
-                { icon: 'i-Receipt-4', name: 'Input Group', state: '/forms/input-group', type: 'link' },
-                { icon: 'i-File-Edit', name: 'Input Mask', state: '/forms/input-mask', type: 'link' },
-                { icon: 'i-Tag-2', name: 'Tag Input', state: '/forms/tag-input', type: 'link' },
-                { icon: 'i-Width-Window', name: 'Wizard', state: '/forms/wizard', type: 'link' },
-                { icon: 'i-Crop-2', name: 'Image Cropper', state: '/forms/img-cropper', type: 'link' },
-            ]
-        },
-        {
-            name: 'Data Tables',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-File-Horizontal-Text',
-            sub: [
-                { icon: 'i-File-Horizontal-Text', name: 'List', state: '/tables/list', type: 'link' },
-                { icon: 'i-Full-View-Window', name: 'Fullscreen', state: '/tables/full', type: 'link' },
-                { icon: 'i-Code-Window', name: 'Paging', state: '/tables/paging', type: 'link' },
-                { icon: 'i-Filter-2', name: 'Filter', state: '/tables/filter', type: 'link' },
-            ]
-        },
-        {
-            name: 'Sessions',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Administrator',
-            sub: [
-                { icon: 'i-Add-User', name: 'Sign up', state: '/sessions/signup', type: 'link' },
-                { icon: 'i-Checked-User', name: 'Sign in', state: '/sessions/signin', type: 'link' },
-                { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
-            ]
-        },
-        {
-            name: 'Pages',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Windows-2',
-            sub: [
-                { icon: 'i-Male', name: 'User Profile', state: '/pages/profile', type: 'link' }
-            ]
-        },
-        {
-            name: 'Icons',
-            description: '600+ premium icons',
-            type: 'link',
-            icon: 'i-Cloud-Sun',
-            state: '/icons/iconsmind'
-        },
-        {
-            name: 'Others',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Double-Tap',
-            sub: [
-                { icon: 'i-Error-404-Window', name: 'Not found', state: '/others/404', type: 'link' }
-            ]
-        },
-        {
-            name: 'Doc',
-            type: 'extLink',
-            tooltip: 'Documentation',
-            icon: 'i-Safe-Box1',
-            state: 'http://demos.ui-lib.com/gull-doc'
-        }
+        
     ];
 
 

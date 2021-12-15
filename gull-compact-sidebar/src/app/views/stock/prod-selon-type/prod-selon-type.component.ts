@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StockService } from 'src/app/shared/services/stock.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-prod-selon-type',
@@ -44,14 +43,5 @@ export class ProdSelonTypeComponent implements OnInit {
     this.greetEvent.emit(this.partelect);
   }
 
-  constructor() { }
-  type: string;
-
-  addType(){
-    
-  }
-
-  ngOnInit(): void {
-  }
 
 }
