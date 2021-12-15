@@ -57,6 +57,8 @@
 		<div class="row">
 			<div class="col-md-6 mb-4">
 				<div class="card">
+					<app-prod-selon-type [alim]="alimentaire" [quinc]="quicaillerie" [elect]="electro" (greetEvent)="greet($event)"></app-prod-selon-type>					
+					<!-- <div class="card-body">
 					<div class="card-body">
 						<h6 class="mb-0 text-muted"> </h6>
 						<p class="text-24 font-weight-light mb-1 text-center">Categories</p><p></p>
@@ -68,6 +70,7 @@
 							<tbody>
 							  <tr>
 								<td style="color: #4CAF50;">1 </td>
+								<td class="font-weight-bold"  > <button class="btn btn-secondary"> Alimentaire</button></td>
 								<td class="font-weight-bold"  > <button class="btn btn-secondary" > Alimentaire</button></td>
 							  </tr>
 							  <tr>
@@ -82,6 +85,8 @@
 							</tbody>
 						  </table>
 					</div>
+			 -->	
+        </div>
 				</div>
 			</div>
 
@@ -94,7 +99,9 @@
 						<p class="text-18 font-weight-light mb-1 text-center">{{alimentaire}} % | {{electro}} % | {{quicaillerie}} %</p>
 						<p></p>
 						<p></p>
+					<!--	<div  echarts [options]="chartPie1" style="height: 140px;"></div>-->
 					<!--	<div echarts [options]="chartPie1" style="height: 140px;"></div>-->
+
 					<app-piechart [alim]="alimentaire" [quic]="quicaillerie" [elect]="electro" ></app-piechart>
 						<p></p>
 						<p> </p>

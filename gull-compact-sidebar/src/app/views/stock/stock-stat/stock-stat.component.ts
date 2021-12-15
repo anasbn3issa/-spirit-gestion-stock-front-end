@@ -23,11 +23,10 @@ export class StockStatComponent implements OnInit {
     public plusR: Stock;
     public moinsR: Stock;
 
-    alimentaire : number;
-    electro : number;
-    quicaillerie : number;
-    chartPie1: any;
-
+    alimentaire : number = 0;
+    electro : number = 0;
+    quicaillerie : number = 0;
+    chartPie1: any;   
 
   ngOnInit(): void {
     this.plusRentable();
@@ -36,13 +35,20 @@ export class StockStatComponent implements OnInit {
     this.pourcentageQuicaillerie();
     this.pourcentageElectromenager();
     console.log(this.alimentaire);
-  console.log(this.electro);
+    console.log(this.electro);
+    console.log(this.quicaillerie);	
+  }
+
+  greet(nb: number){
+    alert("Ce type  represente " + nb +" du total des produits assignés");
+  }
+
+console.log(this.electro);
 console.log(this.quicaillerie);
 
 
 	
   }
-
 
   plusRentable(){
 
