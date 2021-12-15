@@ -43,12 +43,7 @@ export class StockStatComponent implements OnInit {
     alert("Ce type  represente " + nb +" du total des produits assignés");
   }
 
-console.log(this.electro);
-console.log(this.quicaillerie);
 
-
-	
-  }
 
   plusRentable(){
 

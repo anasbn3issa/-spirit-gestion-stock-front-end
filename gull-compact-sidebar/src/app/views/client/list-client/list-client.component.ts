@@ -55,25 +55,14 @@ export class ListClientComponent implements OnInit {
   }
 
   sendData(value: string) {
+    this.clients=[];
+    this.openDelete = false;
+
     console.log("sendData" + value);
+    this.loadClients();
   }
   deleteClient(id, modal) {
-    /* this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })  
-        .result.then((result) => {
-          console.log('debug1');
-            this.clientService.deleteClient(id)
-                .subscribe(res => {
-                    this.toastr.success('Client supprimé!', 'Success!', { timeOut: 3000 });
-                })
-        }, (reason) => {
-        });*/
     this.idToDelete = id;
-    console.log("ID TO BE DELETED" + this.idToDelete);
     this.openDelete = true;
-    /* this.clientService.deleteClient(id)
-                .subscribe(res => {
-                    this.toastr.success('Client supprimé!', 'Success!', { timeOut: 3000 });
-                    this.loadClients();
-                  });*/
   }
 }

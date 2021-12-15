@@ -22,10 +22,7 @@ const routes: Routes = [
       path: 'edit/:id',
       component: EditClientComponent
     },
-    {
-      path: 'delete/:id',
-      component: DeleteClientComponent
-    }
+
   ];
 
   
