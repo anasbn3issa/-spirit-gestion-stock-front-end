@@ -23,11 +23,16 @@ export class AddLivreurComponent implements OnInit {
     this.formAddLivreur = this.fb.group({
       code: ['', Validators.compose([Validators.required])],
       nom: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required])],
-      telephone: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      telephone: ['', Validators.compose([Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
       addresse: ['', Validators.compose([Validators.required])],
     });
   }
+
+  get controls() {
+    return this.formAddLivreur.controls;
+  }
+
 
   submit() {
     this.loading = true;

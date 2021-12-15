@@ -26,9 +26,7 @@ export class StockStatComponent implements OnInit {
     alimentaire : number = 0;
     electro : number = 0;
     quicaillerie : number = 0;
-    chartPie1: any;
-
-
+    chartPie1: any;   
 
   ngOnInit(): void {
     this.plusRentable();
@@ -43,6 +41,13 @@ export class StockStatComponent implements OnInit {
 
   greet(nb: number){
     alert("Ce type  represente " + nb +" du total des produits assignés");
+  }
+
+console.log(this.electro);
+console.log(this.quicaillerie);
+
+
+	
   }
 
   plusRentable(){

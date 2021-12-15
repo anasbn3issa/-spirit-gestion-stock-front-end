@@ -6,5 +6,4 @@ export class Produit {
     idStock: number;
     idRayon: number;
     idDetailProduit: number;
- 
 }

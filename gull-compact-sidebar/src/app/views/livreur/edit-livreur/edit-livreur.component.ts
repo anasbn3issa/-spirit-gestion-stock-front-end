@@ -62,6 +62,10 @@ export class EditLivreurComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get controls() {
+    return this.formAddLivreur.controls;
+  }
+
   ngAfterViewInit() {
     this.confirm()
   }
@@ -111,8 +115,8 @@ export class EditLivreurComponent implements OnInit {
       code: [this.livreur.code, Validators.compose([Validators.required])],
       date: [formatDate(this.livreur.dateAdhesion, 'yyyy-MM-dd', 'fr-FR'), Validators.compose([Validators.required])],
       nom: [this.livreur.nom, Validators.compose([Validators.required])],
-      email: [this.livreur.email, Validators.compose([Validators.required])],
-      telephone: [this.livreur.telephone, Validators.compose([Validators.required])],
+      email: [this.livreur.email, Validators.compose([Validators.required, Validators.email])],
+      telephone: [this.livreur.telephone, Validators.compose([Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
       addresse: [this.livreur.addresse, Validators.compose([Validators.required])],
     });
   }

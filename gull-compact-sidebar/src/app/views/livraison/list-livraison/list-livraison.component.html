@@ -1,0 +1,113 @@
+<div class="breadcrumb">
+    <h1>Liste</h1>
+    <ul>
+        <li><a href="">Livreurs</a></li>
+        <li>Liste</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<app-delete-livraison [id]="id" (notify)="addData($event)" *ngIf="openDelete"></app-delete-livraison>
+<div class="row mb-4">
+    <input id="seatch" placeholder="Rechercher livraison..." [formControl]="searchControl" style="display: unset!important;" class=" col-4 form-control form-control-rounded ml-2" type="email">
+</div>
+
+<!-- DATA LIST -->
+<div class="row" [ngClass]="{'list-horizontal': viewMode === 'list', 'list-grid': viewMode === 'grid'}">
+    <!-- SINGLE LIST ITEM -->
+    <div class="list-item" [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card  o-hidden">
+                    <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
+                        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="80" [rowHeight]="60"
+                        [scrollbarV]="true" [scrollbarH]="true"
+                        [rows]="livraisons | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: total}">
+                        <ngx-datatable-footer>
+                            <ng-template ngx-datatable-footer-template>
+                                    <!-- PAGINATION CONTROL -->
+                                    <div class="col-md-12 mt-3" *ngIf="livraisons?.length">
+                                        <pagination-controls (pageChange)="getPage($event)" previousLabel=""
+                                            nextLabel=""></pagination-controls>
+                                    </div>
+                            </ng-template>
+                        </ngx-datatable-footer>
+                        <ngx-datatable-column name="code" [width]="100">
+                            <ng-template ngx-datatable-header-template>
+                                Code
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="livreur" prop="livreur.nom">
+                            <ng-template ngx-datatable-header-template>
+                                Livreur
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="facture" #fact prop="facture.idFacture">
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                <div class="">
+                                    <a title="Delete" href="javascript:void(0);">{{row.facture.client.prenom}}
+                                        {{row.facture.client.nom}}</a>
+                                </div>
+                            </ng-template>
+                            <ng-template ngx-datatable-header-template>
+                                Client
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="etat">
+                            <ng-template ngx-datatable-header-template>
+                                Etat
+                            </ng-template>
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                <span *ngIf="row.etat=='Nouveau'" class="badge badge-success">{{row.etat}}</span>
+                                <span *ngIf="row.etat=='EnTransition'" class="badge badge-secondary">{{row.etat}}</span>
+                                <span *ngIf="row.etat=='Livre'" class="badge badge-primary">{{row.etat}}</span>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="dateLivraisonPrevue">
+                            <ng-template ngx-datatable-header-template>
+                                Livraison prévue
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="dateLivraison">
+                            <ng-template ngx-datatable-header-template>
+                                Date Livraison
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="" [width]="100">
+                            <ng-template ngx-datatable-header-template>
+                                Action
+                            </ng-template>
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                <div class="d-flex">
+                                    <p alt="View"
+                                        class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Details"
+                                        routerLink="/livraison/{{row.idLivraison}}" 
+                                            class="btn btn-icon bg-transparent"
+                                            [ngClass]="{'d-none': viewMode === 'grid'}">
+                                            <i class="i-File-Edit text-16 text-primary"></i>
+                                        </button>
+                                    </p>
+                                    <p class="m-0 text-muted text-small w-15 w-sm-100 d-none d-lg-block item-actions">
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Annuler"
+                                            (click)="cancel(row.idLivraison)" class="btn btn-icon bg-transparent"
+                                            [ngClass]="{'d-none': viewMode === 'grid'}">
+                                            <i class="i-Close text-16 text-danger"></i>
+                                        </button>
+                                    </p>
+
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="col-md-6">
+    <!--  <div echarts [options]="chartPie1" style="height: 200px;"></div>-->
+</div>
