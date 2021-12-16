@@ -5,6 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { FactureService } from 'src/app/shared/services/facture.service';
+import { DetailFacture, Facture } from 'src/app/shared/models/facture';
+import { Client } from 'src/app/shared/models/client';
+import { ClientService } from 'src/app/shared/services/client.service';
+import { Produit } from 'src/app/shared/models/produit';
+import { ProductTempService } from 'src/app/shared/services/productTemp.service';
 
 @Component({
     selector: 'app-invoice-detail',
@@ -20,51 +26,66 @@ export class InvoiceDetailComponent implements OnInit {
     invoiceFormSub: Subscription;
     subTotal: number;
     saving: boolean;
+    clients: Client[];
+    produits: Produit[];
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private fb: FormBuilder,
-        private dl: DataLayerService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private factureService: FactureService,
+        private produitService: ProductTempService,
+        private clientService: ClientService
     ) { }
 
     ngOnInit() {
+        this.loadProducts();
+        this.loadClients();
         this.id = this.route.snapshot.params['id'];
         this.isNew = !this.id;
         this.buildInvoiceForm(this.invoice);
         if (this.id) {
             this.viewMode = 'print';
-            this.dl.getInvoice(this.id)
+            this.factureService.getFacture(this.id)
                 .subscribe(res => {
                     this.invoice = res;
                     this.buildInvoiceForm(this.invoice);
-                    this.subTotal = this.calculateSubtotal(this.invoiceForm.value);
                 })
         }
     }
 
-    buildInvoiceForm(i: any = {}) {
+    loadClients() {
+        this.clientService.getClients()
+            .subscribe(res => {
+                this.clients = res;
+            })
+        console.log("this.clients : ");
+        console.log(this.clients);
+    }
+
+    loadProducts() {
+        this.produitService.getProducts()
+            .subscribe(res => {
+                this.produits = res;
+            })
+        console.log("this.produit : ");
+        console.log(this.produits);
+    }
+
+    buildInvoiceForm(i: Facture) {
         this.invoiceForm = this.fb.group({
-            id: [i.id],
-            orderNumber: [i.orderNumber],
-            orderStatus: [i.orderStatus],
-            currency: [i.currency],
-            vat: [i.vat],
-            orderDate: [i.orderDate ? Utils.dateToNgbDate(i.orderDate) : {}],
-            billFrom: this.fb.group({
-                name: [i.billFrom ? i.billFrom.name : ''],
-                address: [i.billFrom ? i.billFrom.address : '']
-            }),
-            billTo: this.fb.group({
-                name: [i.billTo ? i.billTo.name : ''],
-                address: [i.billTo ? i.billTo.address : '']
-            }),
-            items: this.fb.array((() => {
-                if (!i.items) {
+            idFacture: [i.idFacture],
+            etat: [i.etat],
+            montantRemise: [i.montantRemise],
+            montantFacture: [i.montantFacture ? i.montantFacture : 0],
+            dateFacture: [i.dateFacture ? Utils.dateToNgbDate(i.dateFacture) : {}],
+            client: [i.client ? (i.client.idClient) : ''],
+            factDetails: this.fb.array((() => {
+                if (!i.factDetails) {
                     return [];
                 }
-                return i.items.map((item) => this.createItem(item));
+                return i.factDetails.map((item) => this.createItem(item));
             })())
         });
         // LINSTEN FOR VALUE CHANGES AND CALCULATE TOTAL
@@ -77,45 +98,94 @@ export class InvoiceDetailComponent implements OnInit {
             });
     }
 
-    createItem(item: any = {}) {
+    createItem(item: DetailFacture) {
+        item = new DetailFacture();
         return this.fb.group({
-            name: [item.name],
-            unit: [item.unit],
-            unitPrice: [item.unitPrice]
+            produit: [item.produit ? item.produit.idProduit : null],
+            // libelle: [item.produit ? item.produit.libelle : ''],
+            qte: [item.qte ? item.qte : 0],
+            // prixUnitaire: [item.produit ? item.produit.prixUnitaire : 0.00],
+            pourcentageRemise: [item.pourcentageRemise ? item.pourcentageRemise : 0]
         });
     }
+
     addItem() {
-        const control = <FormArray>this.invoiceForm.controls['items'];
-        control.push(this.createItem());
+        console.log("this.produit : ");
+        console.log(this.produits);
+        let detFacture!: DetailFacture;
+        const control = <FormArray>this.invoiceForm.controls['factDetails'];
+        control.push(this.createItem(detFacture));
     }
+
     removeItem(i) {
-        const control = <FormArray>this.invoiceForm.controls['items'];
+        const control = <FormArray>this.invoiceForm.controls['factDetails'];
         control.removeAt(i);
     }
 
     saveInvoice() {
         this.saving = true;
         this.invoice = this.invoiceForm.value;
-        this.invoice.orderDate = Utils.ngbDateToDate(this.invoiceForm.value.orderDate);
-        this.dl.saveInvoice(this.invoiceForm.value)
-            .subscribe((savedInvoice: any) => {
-                this.viewMode = 'print';
-                this.saving = false;
-                this.toastr.success('Invoice Saved!', 'Success!', { timeOut: 3000 });
-                if(this.isNew) {
-                    this.router.navigateByUrl('/invoice/edit/'+savedInvoice.id);
-                }
-            });
+        console.log("order date before");
+        console.log(this.invoiceForm.value.dateFacture);
+        this.invoice.dateFacture = Utils.ngbDateToDate(this.invoiceForm.value.dateFacture);
+        console.log("order date ");
+        console.log(this.invoice.dateFacture);
+        const one = new Promise<Facture>((resolve, reject) => {
+            resolve(
+                this.invoice.factDetails.map(e => {
+                    this.produitService.getProduct(e.produit).subscribe(
+                        f => e.produit = f
+                    )
+                    console.log("e ");
+                    console.log(e);
+                })
+            );
+        });
+
+        one.then(res =>
+            this.clientService.getClient(this.invoice.client).subscribe(e => {
+                console.log("res = ");
+                console.log(res);
+                this.invoice.client = e;
+                console.log("this invoice : ");
+                console.log(this.invoice);
+                this.factureService.saveFacture(this.invoiceForm.value, this.invoice.client.idClient)
+                    .subscribe((savedInvoice: Facture) => {
+                        this.viewMode = 'print';
+                        this.saving = false;
+                        this.toastr.success('Invoice Saved!', 'Success!', { timeOut: 3000 });
+                        if (this.isNew) {
+                            this.router.navigateByUrl('/invoice/edit/' + savedInvoice.idFacture);
+                        }
+                    });
+            }));
+        // TODO: CHANGE 2 INTO DYNAMIC CLIENT
     }
 
 
 
     calculateSubtotal(invoice) {
-        let total = 0;
-        invoice.items.forEach(i => {
-            total += (i.unit * i.unitPrice);
+
+        let dfMontantRemise = 0;
+        let dfPrixTotal = 0;
+        let montantRemise = 0;
+        let montantSansRemise = 0;
+
+        console.log("invoice dans suntsdq");
+        console.log(invoice);
+
+        invoice.factDetails.forEach(i => {
+            console.log("factDetails dans suntsdq");
+            console.log(i);
+
+            dfMontantRemise = ((i.produit.prixUnitaire * i.pourcentageRemise) / 100) * i.qte;
+            dfPrixTotal = i.produit.prixUnitaire * i.qte;
+
+            montantRemise = montantRemise + dfMontantRemise;
+            montantSansRemise = montantSansRemise + dfPrixTotal;
         });
-        return total;
+
+        return montantSansRemise;
     }
 
     print() {

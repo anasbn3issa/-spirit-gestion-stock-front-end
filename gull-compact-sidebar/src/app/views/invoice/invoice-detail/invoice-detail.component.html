@@ -9,8 +9,10 @@
                 </div>
                 <div class="d-sm-flex mb-5" *ngIf="viewMode !== 'edit'">
                     <span class="m-auto"></span>
-                    <button class="btn btn-outline-secondary mr-3 mb-sm-0 mb-3" routerLink="/invoice">Back To Invoices</button>
-                    <button class="btn btn-outline-secondary mr-3 mb-sm-0 mb-3" (click)="viewMode = 'edit'">Edit Invoice</button>
+                    <button class="btn btn-outline-secondary mr-3 mb-sm-0 mb-3" routerLink="/invoice">Back To
+                        Invoices</button>
+                    <button class="btn btn-outline-secondary mr-3 mb-sm-0 mb-3" (click)="viewMode = 'edit'">Edit
+                        Invoice</button>
                     <button class="btn btn-primary mb-sm-0 mb-3" (click)="print()">Print Invoice</button>
                 </div>
                 <!---===== Print Area =======-->
@@ -18,27 +20,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="font-weight-bold">Order Info</h4>
-                            <p>#{{invoice.orderNumber}}</p>
+                            <p>#{{invoice.idFacture}}</p>
                         </div>
                         <div class="col-md-6 text-sm-right">
-                            <p><strong>Order status: </strong> {{invoice?.orderStatus}}</p>
-                            <p><strong>Order date: </strong> {{invoice?.orderDate | date}}</p>
+                            <p><strong>Order status: </strong> {{invoice?.etat}}</p>
+                            <p><strong>Order date: </strong> {{invoice?.dateFacture | date}}</p>
                         </div>
                     </div>
                     <div class="mt-3 mb-4 border-top"></div>
                     <div class="row mb-5">
                         <div class="col-md-6 mb-3 mb-sm-0">
                             <h5 class="font-weight-bold">Bill From</h5>
-                            <p>{{invoice?.billFrom?.name}}</p>
+                            <p>{{invoice?.client.nom}} {{invoice?.client.prenom}}</p>
                             <span style="white-space: pre-line">
-                                {{invoice?.billFrom?.address}}
+                                {{invoice?.client.profession}}
                             </span>
                         </div>
                         <div class="col-md-6 text-sm-right">
-                            <h5 class="font-weight-bold">Bill To</h5>
-                            <p>{{invoice?.billTo?.name}}</p>
+                            <h5 class="font-weight-bold">Bill Total</h5>
+                            <p>{{invoice?.montantFacture}}</p>
                             <span style="white-space: pre-line">
-                                {{invoice?.billTo?.address}}
+                                {{invoice?.montantRemise}}
                             </span>
                         </div>
                     </div>
@@ -55,12 +57,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of invoice?.items; let i = index">
+                                    <tr *ngFor="let item of invoice?.factDetails; let i = index">
                                         <th scope="row">{{i + 1}}</th>
-                                        <td>{{item.name}}</td>
-                                        <td>{{item.unitPrice}}</td>
-                                        <td>{{item.unit}}</td>
-                                        <td>{{item.unit * item.unitPrice}}</td>
+                                        <td>{{item.produit.libelle}}</td>
+                                        <td>{{item.produit.prixUnitaire}}</td>
+                                        <td>{{item.qte}}</td>
+                                        <td>{{item.prixTotal}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -68,13 +70,13 @@
 
                         <div class="col-md-12">
                             <div class="invoice-summary float-right">
-                                <p>Sub total: <span>{{invoice.currency}}{{subTotal}}</span></p>
-                                <p>Vat: <span>
-                                    {{invoice.currency}}{{(invoice.vat/100 * subTotal).toFixed(2)}}
-                                </span></p>
+                                <p>Sub total: <span>DT {{invoice?.montantFacture - invoice?.montantRemise}}</span></p>
+                                <p>Promotion: <span>
+                                        DT{{invoice?.montantRemise}}
+                                    </span></p>
                                 <h5 class="font-weight-bold">Grand Total: <span>
-                                    {{invoice.currency}}{{(invoice.vat/100 * subTotal + subTotal)}}
-                                </span></h5>
+                                        DT{{invoice?.montantFacture}}
+                                    </span></h5>
                             </div>
                         </div>
                     </div>
@@ -87,28 +89,23 @@
                         <div class="row justify-content-between">
                             <div class="col-md-6">
                                 <h4 class="font-weight-bold">Order Info</h4>
-                                <div class="col-sm-4 form-group mb-3 pl-0">
-                                    <label for="orderNo">Order Number</label>
-                                    <input formControlName="orderNumber" type="text" class="form-control" id="orderNo"
-                                        placeholder="Enter order number">
-                                </div>
                             </div>
                             <div class="col-md-3 text-right">
                                 <label class="d-block text-12 text-muted">Order Status</label>
                                 <div class="pr-0 mb-4">
                                     <label class="radio radio-reverse radio-danger">
-                                        <input type="radio" name="orderStatus" value="Pending" formControlName="orderStatus">
-                                        <span>Pending</span>
+                                        <input type="radio" name="etat" value="Non_payee" formControlName="etat">
+                                        <span>Non payée</span>
                                         <span class="checkmark"></span>
                                     </label>
                                     <label class="radio radio-reverse radio-warning">
-                                        <input type="radio" name="orderStatus" value="Processing" formControlName="orderStatus">
-                                        <span>Processing</span>
+                                        <input type="radio" name="etat" value="Annulee" formControlName="etat">
+                                        <span>Annulée</span>
                                         <span class="checkmark"></span>
                                     </label>
                                     <label class="radio radio-reverse radio-success">
-                                        <input type="radio" name="orderStatus" value="Delivered" formControlName="orderStatus">
-                                        <span>Delivered</span>
+                                        <input type="radio" name="etat" value="Payee" formControlName="etat">
+                                        <span>Payée</span>
                                         <span class="checkmark"></span>
                                     </label>
 
@@ -116,10 +113,12 @@
                                 <div class="form-group mb-3">
                                     <label for="picker1">Order Date</label>
                                     <div class="input-group">
-                                        <input formControlName="orderDate" id="picker1" class="form-control text-right"
-                                            placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #orderDatePicker="ngbDatepicker">
+                                        <input formControlName="dateFacture" id="picker1"
+                                            class="form-control text-right" placeholder="yyyy-mm-dd" name="dp"
+                                            ngbDatepicker #orderDatePicker="ngbDatepicker">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" (click)="orderDatePicker.toggle()" type="button">
+                                            <button class="btn btn-secondary" (click)="orderDatePicker.toggle()"
+                                                type="button">
                                                 <i class="icon-regular i-Calendar-4"></i>
                                             </button>
                                         </div>
@@ -130,26 +129,16 @@
 
                         <div class="mt-3 mb-4 border-top"></div>
                         <div class="row mb-5">
-                            <div class="col-md-6" [formGroup]="invoiceForm.controls['billFrom']">
+                            <!-- <div class="col-md-6" [formGroup]="invoiceForm.controls['client']"> -->
+                            <div class="col-md-6">
                                 <h5 class="font-weight-bold">Bill From</h5>
                                 <div class="col-md-10 form-group mb-3 pl-0">
-                                    <input formControlName="name" type="text" class="form-control" id="billFrom"
+                                    <select formControlName="client" class="form-control" id="billFrom"
                                         placeholder="Bill From">
-                                </div>
-                                <div class="col-md-10 form-group mb-3 pl-0">
-                                    <textarea formControlName="address" class="form-control" id="" placeholder="Bill From Address"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 text-right" [formGroup]="invoiceForm.controls['billTo']">
-                                <h5 class="font-weight-bold">Bill To</h5>
-                                <div class="col-md-10 offset-md-2 form-group mb-3 pr-0">
-                                    <input formControlName="name" type="text" class="form-control text-right" id="billFrom"
-                                        placeholder="Bill From">
-                                </div>
-                                <div class="col-md-10 offset-md-2 form-group mb-3 pr-0">
-                                    <textarea formControlName="address" class="form-control text-right" id=""
-                                        placeholder="Bill From Address"></textarea>
+                                        <option *ngFor="let client of clients; let i = index" [value]="client.idClient">
+                                            {{client.nom}} {{client.prenom}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -160,34 +149,32 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Item Name</th>
-                                            <th scope="col">Unit Price</th>
                                             <th scope="col">Unit</th>
-                                            <th scope="col">Cost</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <tbody formArrayName="items">
-                                        <tr *ngFor="let item of invoiceForm.controls['items'].controls; let i = index;"
+                                    <tbody formArrayName="factDetails">
+                                        <tr *ngFor="let item of invoiceForm.controls['factDetails'].controls; let i = index;"
                                             [formGroupName]="i">
                                             <th scope="row">{{i + 1}}</th>
                                             <td>
-                                                <input formControlName="name" type="text" class="form-control"
-                                                    placeholder="Item Name">
+                                                <select formControlName="produit" class="form-control"
+                                                    placeholder="Item">
+                                                    <option *ngFor="let produit of produits; let i = index"
+                                                        [value]="produit.idProduit">
+                                                        {{produit.libelle}}
+                                                    </option>
+                                                </select>
+                                                <!-- <input formControlName="libelle" type="text" class="form-control" -->
+                                                <!-- placeholder="Item Name"> -->
                                             </td>
                                             <td>
-                                                <input formControlName="unitPrice" type="number" class="form-control"
-                                                    placeholder="Unit Price">
-                                            </td>
-                                            <td>
-                                                <input formControlName="unit" type="number" class="form-control"
+                                                <input formControlName="qte" type="number" class="form-control"
                                                     placeholder="Unit">
                                             </td>
                                             <td>
-                                                {{invoiceForm.controls['items'].controls[i].controls['unitPrice'].value
-                                                * invoiceForm.controls['items'].controls[i].controls['unit'].value}}
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-outline-secondary float-right" (click)="removeItem(i)">Delete</button>
+                                                <button class="btn btn-outline-secondary float-right"
+                                                    (click)="removeItem(i)">Delete</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -195,24 +182,27 @@
                                 <button class="btn btn-primary float-right mb-4" (click)="addItem()">Add Item</button>
                             </div>
 
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
 
                                 <div class="invoice-summary invoice-summary-input float-right">
-                                    <p>Sub total: <span>{{invoiceForm.controls['currency'].value}}{{subTotal}}</span></p>
-                                    <p class="d-flex align-items-center">Vat(%):<span>
-                                            <input type="text" class="form-control small-input" formControlName="vat">
-                                            {{invoiceForm.controls['currency'].value}}
-                                            {{(invoiceForm.controls['vat'].value/100 * subTotal).toFixed(2)}}
+                                    <p>Sub total: <span>DT{{subTotal}}</span>
+                                    </p>
+                                    <p class="d-flex align-items-center">Vat:<span>
+                                            <input type="text" class="form-control small-input"
+                                                formControlName="montantRemise">
+                                            DT
+                                            {{(invoiceForm.controls['montantRemise'].value)}}
                                         </span></p>
                                     <h5 class="font-weight-bold d-flex align-items-center">Grand Total:
                                         <span>
-                                            <input type="text" class="form-control small-input" formControlName="currency">
-                                            {{invoiceForm.controls['currency'].value}}
-                                            {{(invoiceForm.controls['vat'].value/100 * subTotal + subTotal)}}
+                                            <input type="text" class="form-control small-input"
+                                                formControlName="montantFacture">
+                                            DT
+                                            {{subTotal - (invoiceForm.controls['montantRemise'].value)}}
                                         </span>
                                     </h5>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </form>
